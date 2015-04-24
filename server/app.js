@@ -1,8 +1,11 @@
 var express = require("express");
 var multer = require('multer');
+var exec = require('child_process').exec, child;
 
 var app = express();
 var done = false;
+
+app.set('port', 8000);
 
 app.use(multer({ dest: 'uploads/',
  rename: function (fieldname, filename) {
@@ -12,28 +15,38 @@ app.use(multer({ dest: 'uploads/',
     console.log(file.originalname + ' is starting ...')
   },
   onFileUploadComplete: function (file) {
-    console.log(file.fieldname + ' uploaded to  ' + file.path)
-    done = true;
+    // Upload complete! Begin the processing
+    console.log(file.fieldname + ' uploaded to ' + file.path)
+
+    gifURL = file.path.split('.')[0].split('/')[1] + '.gif'
+    processVideo(file.path, gifURL);
   }
 }));
+
+var processVideo = function(filename, outname) {
+  child = exec('python process.py ' + filename + ' ' + outname,
+    function (error, stdout, stderr) {
+      console.log('stdout: ' + stdout);
+      console.log('stderr: ' + stderr);
+      if (error !== null) {
+        console.log('exec error: ' + error);
+      }
+  });
+}
 
 app.get('/', function(req,res){
   res.sendfile("index.html");
 });
 
 app.post('/video', function(req,res){
+
   console.log('server hit with video!');
-  console.log(req.params);
-  console.log(req.body);
+  console.log(req.files.uploadVideo.name)
 
-  if (done == true){
-    console.log(req.files);
-    res.end("File uploaded.");
-  }
-  res.end();
-
+  gifURL = req.files.uploadVideo.name.split('.')[0] + '.gif';
+  res.json({url: req.files.uploadVideo.name.split('.')[0] + '.gif'});
 });
 
-app.listen(8000, function(){
-    console.log("Working on port 8888");
+app.listen(app.get('port'), function(){
+  console.log("Working on port " + app.get('port'));
 });
