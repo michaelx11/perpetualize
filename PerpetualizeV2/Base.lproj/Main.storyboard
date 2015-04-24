@@ -91,6 +91,7 @@
                         <viewControllerLayoutGuide type="bottom" id="bGg-Jy-m6l"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yik-M7-hCx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ST0-Mu-KZN">
@@ -176,13 +177,13 @@
                                 <exclude reference="cEl-gK-PbT"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="8Lf-NF-F2Q"/>
                                 <exclude reference="3kJ-aN-Mzd"/>
                                 <exclude reference="7yI-xQ-Hk9"/>
                                 <exclude reference="Nem-SW-Pcf"/>
                                 <exclude reference="Ucn-ci-AHT"/>
                                 <exclude reference="ohC-Ka-lB2"/>
                                 <exclude reference="zXp-xl-1mc"/>
-                                <exclude reference="8Lf-NF-F2Q"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -191,13 +192,13 @@
                                 <include reference="cEl-gK-PbT"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="8Lf-NF-F2Q"/>
                                 <include reference="3kJ-aN-Mzd"/>
                                 <include reference="7yI-xQ-Hk9"/>
                                 <include reference="Nem-SW-Pcf"/>
                                 <include reference="Ucn-ci-AHT"/>
                                 <include reference="ohC-Ka-lB2"/>
                                 <include reference="zXp-xl-1mc"/>
-                                <include reference="8Lf-NF-F2Q"/>
                             </mask>
                         </variation>
                     </view>

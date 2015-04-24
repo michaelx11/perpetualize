@@ -70,9 +70,11 @@ class PlaybackController: UIViewController {
             println("WROTE THE VIDEO")
             requestManager.uploadMovie(outputURL, handler: {(url: NSString?, error: NSString?) -> Void in
                 println("YEAHHHHHHH \(outputURL)");
+                self.rewindSegue()
             })
+        } else {
+            rewindSegue()
         }
-        rewindSegue()
     }
     
     func rewindSegue() {
