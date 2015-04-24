@@ -2,9 +2,12 @@ import sys
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-from scipy.signal import argrelextrema
-from scipy.optimize import curve_fit
+import sin_fit as sf
 from moviepy.editor import *
+
+if len(sys.argv) <= 1:
+  print 'python process.py [input] [output] [optional: debug]'
+  exit()
 
 print 'processing video ... ', str(sys.argv[1])
 
@@ -22,12 +25,10 @@ distTrack = []
 videoFrames = []
 distSum = 0
 
-
 # create BFMatcher object
 bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
 
 # Match descriptors.
-
 while(cap.isOpened()):
     ret, frame = cap.read()
     if frame != None:
@@ -69,33 +70,12 @@ while(cap.isOpened()):
     else:
       break
 
-N = len(distTrack) # number of data points
-t = np.linspace(0, 4*np.pi, N)
+# N = len(distTrack) # number of data points
 data = distTrack 
 
-guess_freq = 1
-guess_amplitude = 3*np.std(data)/(2**0.5)
-guess_phase = 3.14159 * 3/2
-guess_offset = np.mean(data)
+(data_fit, period, phase) = sf.sin_fit(data)
 
-p0=[guess_freq, guess_amplitude,
-    guess_phase, guess_offset]
-
-# create the function we want to fit
-def my_sin(x, freq, amplitude, phase, offset):
-    return np.sin(x * freq + phase) * amplitude + offset
-
-# now do the fit
-fit = curve_fit(my_sin, t, data, p0=p0)
-
-# we'll use this to plot our first estimate. This might already be good enough for you
-# data_first_guess = my_curve(t, *p0)
-
-# recreate the fitted curve using the optimized parameters
-data_fit = my_sin(t, *fit[0])
-
-period = 1/(fit[0][0] / (2*np.pi))/(4*np.pi) * N
-phase = fit[0][2]
+print data_fit
 
 print 'best matches for frames: '
 print int(phase)
@@ -208,6 +188,7 @@ clip.write_gif(OUTNAME)
 # cv2.imshow('frame2', hf2)
 
 # # cv2.imshow('frame2', hf2)
+print data
 
 if DEBUG:
   plt.plot(data, '.')
