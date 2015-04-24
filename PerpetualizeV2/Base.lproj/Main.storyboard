@@ -2,6 +2,9 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -98,7 +101,8 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="73" id="a4i-W9-Wy0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Done">
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
@@ -116,33 +120,83 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="rewindSegue" destination="1tn-ei-qjX" eventType="touchDown" id="uOD-zk-P0N"/>
+                                    <action selector="saveVideo" destination="1tn-ei-qjX" eventType="touchDown" id="aTr-RM-yQj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cEl-gK-PbT">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="87" id="RL8-LU-2Rv"/>
+                                    <constraint firstAttribute="height" constant="30" id="mkw-CT-JOB"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="87" id="scT-tS-u3E"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Discard">
+                                    <color key="titleColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="RL8-LU-2Rv"/>
+                                        <exclude reference="mkw-CT-JOB"/>
+                                        <exclude reference="scT-tS-u3E"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="RL8-LU-2Rv"/>
+                                        <include reference="mkw-CT-JOB"/>
+                                        <include reference="scT-tS-u3E"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="discardVideo" destination="1tn-ei-qjX" eventType="touchDown" id="oOX-Jm-KYC"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="ST0-Mu-KZN" firstAttribute="top" secondItem="NwW-Pv-nKb" secondAttribute="bottom" priority="750" constant="640" id="3kJ-aN-Mzd"/>
-                            <constraint firstItem="ST0-Mu-KZN" firstAttribute="centerX" secondItem="yik-M7-hCx" secondAttribute="centerX" id="7yI-xQ-Hk9"/>
-                            <constraint firstItem="bGg-Jy-m6l" firstAttribute="top" secondItem="ST0-Mu-KZN" secondAttribute="bottom" constant="110" id="8Lf-NF-F2Q"/>
+                            <constraint firstItem="ST0-Mu-KZN" firstAttribute="top" secondItem="NwW-Pv-nKb" secondAttribute="bottom" priority="750" constant="640" id="3kJ-aN-Mzd">
+                                <variation key="heightClass=regular-widthClass=compact" constant="673"/>
+                            </constraint>
+                            <constraint firstItem="ST0-Mu-KZN" firstAttribute="centerX" secondItem="yik-M7-hCx" secondAttribute="centerX" id="7yI-xQ-Hk9">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-104.5"/>
+                            </constraint>
+                            <constraint firstItem="bGg-Jy-m6l" firstAttribute="top" secondItem="ST0-Mu-KZN" secondAttribute="bottom" constant="110" id="8Lf-NF-F2Q">
+                                <variation key="heightClass=regular-widthClass=compact" constant="77"/>
+                            </constraint>
+                            <constraint firstItem="cEl-gK-PbT" firstAttribute="top" secondItem="ST0-Mu-KZN" secondAttribute="top" id="Nem-SW-Pcf"/>
+                            <constraint firstItem="cEl-gK-PbT" firstAttribute="baseline" secondItem="ST0-Mu-KZN" secondAttribute="baseline" id="Ucn-ci-AHT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cEl-gK-PbT" secondAttribute="trailing" constant="39" id="ohC-Ka-lB2"/>
+                            <constraint firstItem="cEl-gK-PbT" firstAttribute="firstBaseline" secondItem="ST0-Mu-KZN" secondAttribute="baseline" id="zXp-xl-1mc"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="ST0-Mu-KZN"/>
+                                <exclude reference="cEl-gK-PbT"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="3kJ-aN-Mzd"/>
                                 <exclude reference="7yI-xQ-Hk9"/>
+                                <exclude reference="Nem-SW-Pcf"/>
+                                <exclude reference="Ucn-ci-AHT"/>
+                                <exclude reference="ohC-Ka-lB2"/>
+                                <exclude reference="zXp-xl-1mc"/>
                                 <exclude reference="8Lf-NF-F2Q"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="ST0-Mu-KZN"/>
+                                <include reference="cEl-gK-PbT"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="3kJ-aN-Mzd"/>
                                 <include reference="7yI-xQ-Hk9"/>
+                                <include reference="Nem-SW-Pcf"/>
+                                <include reference="Ucn-ci-AHT"/>
+                                <include reference="ohC-Ka-lB2"/>
+                                <include reference="zXp-xl-1mc"/>
                                 <include reference="8Lf-NF-F2Q"/>
                             </mask>
                         </variation>

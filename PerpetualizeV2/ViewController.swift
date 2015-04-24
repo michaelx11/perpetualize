@@ -86,7 +86,6 @@ class ViewController: UIViewController {
         println("started recording!")
         var temp = NSTemporaryDirectory();
         var outputURL : NSURL = NSURL(fileURLWithPath: "\(temp)/movie" + NSProcessInfo.processInfo().globallyUniqueString + ".mp4")!
-        localData.currentVideoURL = outputURL
         println("URL: \(outputURL)")
         println("what: \(outputURL.path)")
         self.movieOutput.startRecordingToOutputFileURL(outputURL, recordingDelegate: self.recordingDelegate)
@@ -119,7 +118,7 @@ class ViewController: UIViewController {
     }
     
     func presentPlaybackView() {
-        presentViewController(playbackController, animated: true, completion: {
+        presentViewController(playbackController, animated: false, completion: {
             println("PRESENTING THE PLAYBACK CONTROLLER HOHOH")
         })
     }

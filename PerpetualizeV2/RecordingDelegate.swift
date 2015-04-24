@@ -28,17 +28,9 @@ class RecordingDelegate : NSObject, AVCaptureFileOutputRecordingDelegate {
         if let err = error {
             println(err)
         }
-        println(captureOutput.recordedDuration);
-        println(captureOutput.recordedFileSize);
-        if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(outputFileURL.path) {
-//            UISaveVideoAtPathToSavedPhotosAlbum(outputFileURL.path, nil, nil, nil)
-            println("WROTE THE VIDEO")
-            requestManager.uploadMovie(outputFileURL!, handler: {(url: NSString?, error: NSString?) -> Void in
-                println("YEAHHHHHHH \(outputFileURL)");
-                self.parent.presentPlaybackView()
-            })
-        }
-//        UISaveVideoAtPathToSavedPhotosAlbum(outputFileURL, nil, nil, nil)
+        localData.currentVideoURL = outputFileURL
+        self.parent.playbackController.refreshPlayer()
+        self.parent.presentPlaybackView()
         println("Stopped recording movie!")
     }
 }

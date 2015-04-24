@@ -15,17 +15,29 @@ class PlaybackController: UIViewController {
     var mainView: ViewController!
     @IBOutlet var doneButton: UIButton!
     
+    var didLoad = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         println("DID LOAD")
         // Do any additional setup after loading the view, typically from a nib.
+
+        didLoad = true
+        refreshPlayer()
+    }
+    
+    func refreshPlayer() {
+        if !didLoad {
+            return
+        }
+        
         player = AVPlayer(URL: localData.currentVideoURL)
         
         if player != nil {
             var playerLayer = AVPlayerLayer(player: player)
             playerLayer.frame = self.view.frame
+            playerLayer.cornerRadius = 10
             self.view.layer.insertSublayer(playerLayer, below: doneButton.layer)
-//            self.view.layer.addSublayer(playerLayer)
             player?.seekToTime(kCMTimeZero)
             player?.play()
             // Code to allow looping
@@ -39,71 +51,28 @@ class PlaybackController: UIViewController {
         player?.play()
     }
     
-    @IBAction func rewindSegue() {
+    @IBAction func discardVideo() {
+        rewindSegue()
+    }
+    
+    @IBAction func saveVideo() {
+        var outputURL = localData.currentVideoURL!
+        if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(outputURL.path) {
+            UISaveVideoAtPathToSavedPhotosAlbum(outputURL.path, nil, nil, nil)
+            println("WROTE THE VIDEO")
+            requestManager.uploadMovie(outputURL, handler: {(url: NSString?, error: NSString?) -> Void in
+                println("YEAHHHHHHH \(outputURL)");
+            })
+        }
+        rewindSegue()
+    }
+    
+    func rewindSegue() {
         println("GOT CALLED YO")
-        self.dismissViewControllerAnimated(true, completion: {
+        self.dismissViewControllerAnimated(false, completion: {
             println("yeah dismissed yeah")
         })
     }
-//    func beginSession() {
-//        var err : NSError? = nil
-//        captureSession.addInput(AVCaptureDeviceInput(device: captureDevice, error: &err))
-//        
-//        if err != nil {
-//            println("error: \(err?.localizedDescription)")
-//        }
-//        
-//        movieOutput.maxRecordedDuration = CMTimeMakeWithSeconds(10, 30)
-//        movieOutput.minFreeDiskSpaceLimit = 10 * 1024 * 1024
-//        if captureSession.canAddOutput(self.movieOutput) {
-//            captureSession.addOutput(self.movieOutput)
-//        } else {
-//            println("couldn't add movie output!")
-//        }
-//        
-//        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-//        previewLayer?.cornerRadius = 10.0
-//        //        self.view.layer.addSublayer(previewLayer)
-//        self.view.layer.insertSublayer(previewLayer, below: self.recordButton.layer);
-//        previewLayer?.frame = self.view.layer.frame
-//        previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill;
-//        captureSession.startRunning()
-//    }
-//    
-//    @IBAction func startRecording() {
-//        println("started recording!")
-//        var temp = NSTemporaryDirectory();
-//        var outputURL : NSURL = NSURL(fileURLWithPath: "\(temp)/movie" + NSProcessInfo.processInfo().globallyUniqueString + ".mp4")!;
-//        println("URL: \(outputURL)")
-//        println("what: \(outputURL.path)")
-//        self.movieOutput.startRecordingToOutputFileURL(outputURL, recordingDelegate: self.recordingDelegate)
-//    }
-//    
-//    @IBAction func stopRecording() {
-//        println("stopped recording woo")
-//        self.movieOutput.stopRecording();
-//    }
-//    
-//    func configureDevice() {
-//        if let device = captureDevice {
-//            device.lockForConfiguration(nil)
-//            device.focusMode = .Locked
-//            device.unlockForConfiguration()
-//        }
-//    }
-//    
-//    func focusTo(value : Float) {
-//        println("FOCUSING")
-//        if let device = captureDevice {
-//            if(device.lockForConfiguration(nil)) {
-//                println(value)
-//                device.setFocusModeLockedWithLensPosition(value, completionHandler: { (time) -> Void in
-//                    //
-//                })
-//                device.unlockForConfiguration()
-//            }
-//        }
-//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
