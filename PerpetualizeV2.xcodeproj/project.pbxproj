@@ -15,6 +15,7 @@
 		F46C26AF1AE97A2C00640866 /* PerpetualizeV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C26AE1AE97A2C00640866 /* PerpetualizeV2Tests.swift */; };
 		F46C26B91AE9AD0000640866 /* RecordingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C26B81AE9AD0000640866 /* RecordingDelegate.swift */; };
 		F46C26BB1AE9C89800640866 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C26BA1AE9C89800640866 /* RequestManager.swift */; };
+		F46C26BD1AE9CDFA00640866 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46C26BC1AE9CDFA00640866 /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		F46C26AE1AE97A2C00640866 /* PerpetualizeV2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerpetualizeV2Tests.swift; sourceTree = "<group>"; };
 		F46C26B81AE9AD0000640866 /* RecordingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingDelegate.swift; sourceTree = "<group>"; };
 		F46C26BA1AE9C89800640866 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		F46C26BC1AE9CDFA00640866 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F46C26BD1AE9CDFA00640866 /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +66,7 @@
 		F46C268A1AE97A2C00640866 = {
 			isa = PBXGroup;
 			children = (
+				F46C26BC1AE9CDFA00640866 /* MobileCoreServices.framework */,
 				F46C26951AE97A2C00640866 /* PerpetualizeV2 */,
 				F46C26AB1AE97A2C00640866 /* PerpetualizeV2Tests */,
 				F46C26941AE97A2C00640866 /* Products */,

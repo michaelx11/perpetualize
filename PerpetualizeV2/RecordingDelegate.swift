@@ -29,6 +29,22 @@ class RecordingDelegate : NSObject, AVCaptureFileOutputRecordingDelegate {
         if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(outputFileURL.path) {
             UISaveVideoAtPathToSavedPhotosAlbum(outputFileURL.path, nil, nil, nil)
             println("WROTE THE VIDEO")
+
+//            var filename : String = (outputFileURL.pathComponents?.last as! String).stringByDeletingPathExtension;
+//            println("YO: \(filename)")
+//            var path = NSBundle.mainBundle().pathForResource(filename, ofType: ".mp4")
+
+//            println("path ext: \(outputFileURL.pathExtension)")
+//            println("REAL PATH: \(path)")
+//            NSData(contentsOfURL: outputFileURL)
+//            println(errP)
+//            println("data?!??!: \(NSData(contentsOfFile: outputFileURL.path!))")
+//            println("data?!??! 2: \(NSData(contentsOfURL: outputFileURL, options: nil, error: &errP))")
+//            println(errP)
+//            println("data?!??! 3: \(NSData(contentsOfURL: outputFileURL.!))")
+            requestManager.uploadMovie(outputFileURL!, handler: {(url: NSString?, error: NSString?) -> Void in
+                println("YEAHHHHHHH \(outputFileURL)");
+            })
         }
 //        UISaveVideoAtPathToSavedPhotosAlbum(outputFileURL, nil, nil, nil)
         println("Stopped recording movie!")

@@ -9,6 +9,8 @@
 import UIKit
 import AVFoundation
 
+let requestManager = RequestManager();
+
 class ViewController: UIViewController {
     
     let captureSession = AVCaptureSession();
@@ -19,6 +21,7 @@ class ViewController: UIViewController {
     // If we find a device we'll store it here for later use
     var captureDevice : AVCaptureDevice?
     var movieOutput : AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
+//    var memoryOutput : AVCaptureVideoDataOutput = AVCaptureVideoDataOutput()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +74,8 @@ class ViewController: UIViewController {
     
     @IBAction func startRecording() {
         println("started recording!")
-        var outputURL : NSURL = NSURL(fileURLWithPath: "tmp/movie" + NSProcessInfo.processInfo().globallyUniqueString + ".mp4")!;
+        var temp = NSTemporaryDirectory();
+        var outputURL : NSURL = NSURL(fileURLWithPath: "\(temp)/movie" + NSProcessInfo.processInfo().globallyUniqueString + ".mp4")!;
         println("URL: \(outputURL)")
         println("what: \(outputURL.path)")
         self.movieOutput.startRecordingToOutputFileURL(outputURL, recordingDelegate: self.recordingDelegate)
