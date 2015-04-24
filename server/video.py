@@ -1,27 +1,20 @@
-import sys
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 from scipy.signal import argrelextrema
 from scipy.optimize import curve_fit
+
 from moviepy.editor import *
 
-print 'processing video ... ', str(sys.argv[1])
-
-INNAME = sys.argv[1]
-OUTNAME = sys.argv[2]
-
-if len(sys.argv) > 2:
-  print 'DEBUG MODE' + str(sys.argv)
-  DEBUG = True
-
-cap = cv2.VideoCapture(INNAME)
+cap = cv2.VideoCapture('test_videos/boo.mov')
 basedes = None
 basekp = None
 distTrack = []
 videoFrames = []
 distSum = 0
 
+# for debugging
+SHOW_VIDEO = False
 
 # create BFMatcher object
 bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
@@ -61,10 +54,10 @@ while(cap.isOpened()):
       for i in kp1:
         cv2.circle(frame, (int(i.pt[0]), int(i.pt[1])), 3, (255, 255, 255), -1)
 
-      # if SHOW_VIDEO:
-      #   cv2.imshow('frame', frame)
-      #   if cv2.waitKey(1) & 0xFF == ord('q'):
-      #       break
+      if SHOW_VIDEO:
+        cv2.imshow('frame', frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
     else:
       break
@@ -159,7 +152,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 clip = (VideoFileClip("testout.mp4"))
-clip.write_gif(OUTNAME)
+clip.write_gif("use_your_head.gif")
 
 
 # sift = cv2.SIFT()
@@ -209,10 +202,7 @@ clip.write_gif(OUTNAME)
 
 # # cv2.imshow('frame2', hf2)
 
-if DEBUG:
-  plt.plot(data, '.')
-  plt.plot(data_fit, label='after fitting')
-  plt.show()
-
-
+# plt.plot(data, '.')
+# plt.plot(data_fit, label='after fitting')
+# plt.show()
 
