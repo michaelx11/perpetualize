@@ -9,7 +9,8 @@
 import Foundation
 import MobileCoreServices
 
-let host : NSString = "v.one.haus";
+//let host : NSString = "log.haus";
+let host : NSString = "one.haus";
 
 class RequestManager {
 
@@ -28,6 +29,7 @@ class RequestManager {
             "password" : "placeholder"]  // build your dictionary however appropriate
         
         let boundary = generateBoundaryString()
+        println(boundary);
         
         let url = NSURL(string: "http://\(host)/video")
         let request = NSMutableURLRequest(URL: url!)
@@ -36,8 +38,10 @@ class RequestManager {
         
 //        let path1 = NSBundle.mainBundle().pathForResource("image1", ofType: "png") as String!
 //        let path2 = NSBundle.mainBundle().pathForResource("image2", ofType: "jpg") as String!
-        request.HTTPBody = createBodyWithParameters(param, filePathKey: "file", paths: [fileURL.path!], boundary: boundary)
-        
+        request.HTTPBody = createBodyWithParameters(param, filePathKey: "uploadVideo", paths: [fileURL.path!], boundary: boundary)
+//        request.HTTPBody = stringToNSData("HELLO THERE MY FRIEND")
+//        String(
+//        println(String(initstringInterpolationSegment: request.HTTPBody))
         return request
     }
 
@@ -48,7 +52,7 @@ class RequestManager {
     /// :param: paths        The optional array of file paths of the files to be uploaded
     /// :param: boundary     The multipart/form-data boundary
     ///
-    /// :returns:            The NSData of the body of the request
+    /// :returns:           The NSData of the body of the request
 
     func createBodyWithParameters(parameters: [String: String]?, filePathKey: String?, paths: [String]?, boundary: String) -> NSData {
         let body = NSMutableData()
@@ -150,6 +154,6 @@ class RequestManager {
     }
     
     func stringToNSData(string: NSString) -> NSData {
-        return string.dataUsingEncoding(NSUTF16StringEncoding)!
+        return string.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!
     }
 }
