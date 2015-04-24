@@ -24,10 +24,8 @@ app.use(multer({ dest: 'uploads/',
 }));
 
 var processVideo = function(filename, outname) {
-  child = exec('python process.py ' + filename + ' ' + outname,
+  child = exec('python process.py ' + filename + ' exports/'+outname,
     function (error, stdout, stderr) {
-      console.log('stdout: ' + stdout);
-      console.log('stderr: ' + stderr);
       if (error !== null) {
         console.log('exec error: ' + error);
       }
