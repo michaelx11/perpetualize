@@ -11,14 +11,18 @@ import AVFoundation
 
 class ViewController: UIViewController {
     
-    let captureSession = AVCaptureSession()
+    let captureSession = AVCaptureSession();
+    let recordingDelegate : RecordingDelegate = RecordingDelegate()
     var previewLayer : AVCaptureVideoPreviewLayer?
+    @IBOutlet var recordButton : UIButton!
     
     // If we find a device we'll store it here for later use
     var captureDevice : AVCaptureDevice?
+    var movieOutput : AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        println("DID LOAD")
         // Do any additional setup after loading the view, typically from a nib.
         captureSession.sessionPreset = AVCaptureSessionPresetHigh
         
@@ -48,12 +52,34 @@ class ViewController: UIViewController {
             println("error: \(err?.localizedDescription)")
         }
         
+        movieOutput.maxRecordedDuration = CMTimeMakeWithSeconds(10, 30)
+        movieOutput.minFreeDiskSpaceLimit = 10 * 1024 * 1024
+        if captureSession.canAddOutput(self.movieOutput) {
+            captureSession.addOutput(self.movieOutput)
+        } else {
+            println("couldn't add movie output!")
+        }
+        
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer?.cornerRadius = 10.0
-        self.view.layer.addSublayer(previewLayer)
+//        self.view.layer.addSublayer(previewLayer)
+        self.view.layer.insertSublayer(previewLayer, below: self.recordButton.layer);
         previewLayer?.frame = self.view.layer.frame
         previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill;
         captureSession.startRunning()
+    }
+    
+    @IBAction func startRecording() {
+        println("started recording!")
+        var outputURL : NSURL = NSURL(fileURLWithPath: "tmp/movie" + NSProcessInfo.processInfo().globallyUniqueString + ".mp4")!;
+        println("URL: \(outputURL)")
+        println("what: \(outputURL.path)")
+        self.movieOutput.startRecordingToOutputFileURL(outputURL, recordingDelegate: self.recordingDelegate)
+    }
+    
+    @IBAction func stopRecording() {
+        println("stopped recording woo")
+        self.movieOutput.stopRecording();
     }
     
     func configureDevice() {
@@ -79,19 +105,19 @@ class ViewController: UIViewController {
     
     let screenWidth = UIScreen.mainScreen().bounds.size.width
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        println("TOUCHES BEGAN")
-        var anyTouch = touches.first as! UITouch
-        var touchPercent = anyTouch.locationInView(self.view).x / screenWidth
-        focusTo(Float(touchPercent))
-    }
-    
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        println("TOUCHES MOVED")
-        var anyTouch = touches.first as! UITouch
-        var touchPercent = anyTouch.locationInView(self.view).x / screenWidth
-        focusTo(Float(touchPercent))
-    }
+//    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+//        println("TOUCHES BEGAN")
+//        var anyTouch = touches.first as! UITouch
+//        var touchPercent = anyTouch.locationInView(self.view).x / screenWidth
+//        focusTo(Float(touchPercent))
+//    }
+//    
+//    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+//        println("TOUCHES MOVED")
+//        var anyTouch = touches.first as! UITouch
+//        var touchPercent = anyTouch.locationInView(self.view).x / screenWidth
+//        focusTo(Float(touchPercent))
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

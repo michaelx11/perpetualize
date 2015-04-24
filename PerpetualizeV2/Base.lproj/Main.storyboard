@@ -16,55 +16,65 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gHR-av-YHU">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3u7-Pc-8OD">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="g2Q-rC-xQr"/>
+                                    <constraint firstAttribute="height" constant="44" id="HPu-kW-sJh"/>
+                                    <constraint firstAttribute="width" constant="94" id="uMX-bw-cSn"/>
                                 </constraints>
-                                <color key="tintColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="test">
-                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="Record">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="g2Q-rC-xQr"/>
+                                        <exclude reference="HPu-kW-sJh"/>
+                                        <exclude reference="uMX-bw-cSn"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="g2Q-rC-xQr"/>
+                                        <include reference="HPu-kW-sJh"/>
+                                        <include reference="uMX-bw-cSn"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="startRecording" destination="vXZ-lx-hvc" eventType="touchDown" id="WuY-2r-frl"/>
+                                    <action selector="stopRecording" destination="vXZ-lx-hvc" eventType="touchUpOutside" id="Uvd-bF-O7P"/>
+                                    <action selector="stopRecording" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mS8-EC-m4G"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="gHR-av-YHU" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="583" id="568-RV-jol"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="gHR-av-YHU" secondAttribute="bottom" constant="97" id="9xD-OT-Ooz"/>
-                            <constraint firstItem="gHR-av-YHU" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Gxe-NF-bfr"/>
+                            <constraint firstItem="3u7-Pc-8OD" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" priority="750" constant="648" id="3Es-Ot-HGb"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="3u7-Pc-8OD" secondAttribute="bottom" constant="103" id="MCe-Qm-NQy"/>
+                            <constraint firstItem="3u7-Pc-8OD" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="uZD-MI-MvN"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="gHR-av-YHU"/>
+                                <exclude reference="3u7-Pc-8OD"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="568-RV-jol"/>
-                                <exclude reference="Gxe-NF-bfr"/>
-                                <exclude reference="9xD-OT-Ooz"/>
+                                <exclude reference="3Es-Ot-HGb"/>
+                                <exclude reference="uZD-MI-MvN"/>
+                                <exclude reference="MCe-Qm-NQy"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="gHR-av-YHU"/>
+                                <include reference="3u7-Pc-8OD"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="568-RV-jol"/>
-                                <include reference="Gxe-NF-bfr"/>
-                                <include reference="9xD-OT-Ooz"/>
+                                <include reference="3Es-Ot-HGb"/>
+                                <include reference="uZD-MI-MvN"/>
+                                <include reference="MCe-Qm-NQy"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="recordButton" destination="3u7-Pc-8OD" id="fq7-g5-A02"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

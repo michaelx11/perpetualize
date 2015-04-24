@@ -13,6 +13,7 @@
 		F46C26A01AE97A2C00640866 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F46C269F1AE97A2C00640866 /* Images.xcassets */; };
 		F46C26A31AE97A2C00640866 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F46C26A11AE97A2C00640866 /* LaunchScreen.xib */; };
 		F46C26AF1AE97A2C00640866 /* PerpetualizeV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C26AE1AE97A2C00640866 /* PerpetualizeV2Tests.swift */; };
+		F46C26B91AE9AD0000640866 /* RecordingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C26B81AE9AD0000640866 /* RecordingDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		F46C26A81AE97A2C00640866 /* PerpetualizeV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PerpetualizeV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F46C26AD1AE97A2C00640866 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F46C26AE1AE97A2C00640866 /* PerpetualizeV2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerpetualizeV2Tests.swift; sourceTree = "<group>"; };
+		F46C26B81AE9AD0000640866 /* RecordingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				F46C26981AE97A2C00640866 /* AppDelegate.swift */,
 				F46C269A1AE97A2C00640866 /* ViewController.swift */,
+				F46C26B81AE9AD0000640866 /* RecordingDelegate.swift */,
 				F46C269C1AE97A2C00640866 /* Main.storyboard */,
 				F46C269F1AE97A2C00640866 /* Images.xcassets */,
 				F46C26A11AE97A2C00640866 /* LaunchScreen.xib */,
@@ -214,6 +217,7 @@
 			files = (
 				F46C269B1AE97A2C00640866 /* ViewController.swift in Sources */,
 				F46C26991AE97A2C00640866 /* AppDelegate.swift in Sources */,
+				F46C26B91AE9AD0000640866 /* RecordingDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
