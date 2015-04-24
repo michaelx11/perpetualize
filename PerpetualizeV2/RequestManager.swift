@@ -9,8 +9,8 @@
 import Foundation
 import MobileCoreServices
 
-//let host : NSString = "log.haus";
-let host : NSString = "one.haus";
+let host : NSString = "log.haus";
+//let host : NSString = "one.haus";
 
 class RequestManager {
 
@@ -39,9 +39,6 @@ class RequestManager {
 //        let path1 = NSBundle.mainBundle().pathForResource("image1", ofType: "png") as String!
 //        let path2 = NSBundle.mainBundle().pathForResource("image2", ofType: "jpg") as String!
         request.HTTPBody = createBodyWithParameters(param, filePathKey: "uploadVideo", paths: [fileURL.path!], boundary: boundary)
-//        request.HTTPBody = stringToNSData("HELLO THERE MY FRIEND")
-//        String(
-//        println(String(initstringInterpolationSegment: request.HTTPBody))
         return request
     }
 

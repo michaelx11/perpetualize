@@ -16,6 +16,8 @@
 		F46C26B91AE9AD0000640866 /* RecordingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C26B81AE9AD0000640866 /* RecordingDelegate.swift */; };
 		F46C26BB1AE9C89800640866 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C26BA1AE9C89800640866 /* RequestManager.swift */; };
 		F46C26BD1AE9CDFA00640866 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46C26BC1AE9CDFA00640866 /* MobileCoreServices.framework */; };
+		F46C26CB1AEACDBA00640866 /* PlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C26CA1AEACDBA00640866 /* PlaybackController.swift */; };
+		F46C26CD1AEACF5100640866 /* FastLocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C26CC1AEACF5100640866 /* FastLocalData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,8 @@
 		F46C26B81AE9AD0000640866 /* RecordingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingDelegate.swift; sourceTree = "<group>"; };
 		F46C26BA1AE9C89800640866 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		F46C26BC1AE9CDFA00640866 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F46C26CA1AEACDBA00640866 /* PlaybackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaybackController.swift; path = ../PlaybackController.swift; sourceTree = "<group>"; };
+		F46C26CC1AEACF5100640866 /* FastLocalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FastLocalData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,8 +91,10 @@
 			children = (
 				F46C26981AE97A2C00640866 /* AppDelegate.swift */,
 				F46C269A1AE97A2C00640866 /* ViewController.swift */,
+				F46C26CA1AEACDBA00640866 /* PlaybackController.swift */,
 				F46C26B81AE9AD0000640866 /* RecordingDelegate.swift */,
 				F46C26BA1AE9C89800640866 /* RequestManager.swift */,
+				F46C26CC1AEACF5100640866 /* FastLocalData.swift */,
 				F46C269C1AE97A2C00640866 /* Main.storyboard */,
 				F46C269F1AE97A2C00640866 /* Images.xcassets */,
 				F46C26A11AE97A2C00640866 /* LaunchScreen.xib */,
@@ -223,7 +229,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F46C269B1AE97A2C00640866 /* ViewController.swift in Sources */,
+				F46C26CB1AEACDBA00640866 /* PlaybackController.swift in Sources */,
 				F46C26991AE97A2C00640866 /* AppDelegate.swift in Sources */,
+				F46C26CD1AEACF5100640866 /* FastLocalData.swift in Sources */,
 				F46C26B91AE9AD0000640866 /* RecordingDelegate.swift in Sources */,
 				F46C26BB1AE9C89800640866 /* RequestManager.swift in Sources */,
 			);
@@ -421,6 +429,7 @@
 				F46C26B41AE97A2C00640866 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F46C26B51AE97A2C00640866 /* Build configuration list for PBXNativeTarget "PerpetualizeV2Tests" */ = {
 			isa = XCConfigurationList;
@@ -429,6 +438,7 @@
 				F46C26B71AE97A2C00640866 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

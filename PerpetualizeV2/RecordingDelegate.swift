@@ -12,6 +12,10 @@ import UIKit
 
 class RecordingDelegate : NSObject, AVCaptureFileOutputRecordingDelegate {
     
+    // TODO: FAT HACK WILL FIX WHEN WISER
+    // Should be populated before delegate is used
+    var parent: ViewController!
+    
     override init() {
         println("CREATED")
     }
@@ -27,23 +31,11 @@ class RecordingDelegate : NSObject, AVCaptureFileOutputRecordingDelegate {
         println(captureOutput.recordedDuration);
         println(captureOutput.recordedFileSize);
         if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(outputFileURL.path) {
-            UISaveVideoAtPathToSavedPhotosAlbum(outputFileURL.path, nil, nil, nil)
+//            UISaveVideoAtPathToSavedPhotosAlbum(outputFileURL.path, nil, nil, nil)
             println("WROTE THE VIDEO")
-
-//            var filename : String = (outputFileURL.pathComponents?.last as! String).stringByDeletingPathExtension;
-//            println("YO: \(filename)")
-//            var path = NSBundle.mainBundle().pathForResource(filename, ofType: ".mp4")
-
-//            println("path ext: \(outputFileURL.pathExtension)")
-//            println("REAL PATH: \(path)")
-//            NSData(contentsOfURL: outputFileURL)
-//            println(errP)
-//            println("data?!??!: \(NSData(contentsOfFile: outputFileURL.path!))")
-//            println("data?!??! 2: \(NSData(contentsOfURL: outputFileURL, options: nil, error: &errP))")
-//            println(errP)
-//            println("data?!??! 3: \(NSData(contentsOfURL: outputFileURL.!))")
             requestManager.uploadMovie(outputFileURL!, handler: {(url: NSString?, error: NSString?) -> Void in
                 println("YEAHHHHHHH \(outputFileURL)");
+                self.parent.presentPlaybackView()
             })
         }
 //        UISaveVideoAtPathToSavedPhotosAlbum(outputFileURL, nil, nil, nil)

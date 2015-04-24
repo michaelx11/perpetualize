@@ -10,11 +10,13 @@ import UIKit
 import AVFoundation
 
 let requestManager = RequestManager();
+let localData = FastLocalData();
 
 class ViewController: UIViewController {
     
-    let captureSession = AVCaptureSession();
+    let captureSession = AVCaptureSession()
     let recordingDelegate : RecordingDelegate = RecordingDelegate()
+    var playbackController : PlaybackController!
     var previewLayer : AVCaptureVideoPreviewLayer?
     @IBOutlet var recordButton : UIButton!
     
@@ -45,6 +47,14 @@ class ViewController: UIViewController {
         if captureDevice != nil {
             beginSession()
         }
+        
+        // Pass self reference to recording delegate
+        recordingDelegate.parent = self
+        
+        // Get playback controller
+        playbackController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PlaybackController") as! PlaybackController
+        // HACK: give a reference to allow playback to present our view when done
+        playbackController.mainView = self
     }
 
     func beginSession() {
@@ -75,7 +85,8 @@ class ViewController: UIViewController {
     @IBAction func startRecording() {
         println("started recording!")
         var temp = NSTemporaryDirectory();
-        var outputURL : NSURL = NSURL(fileURLWithPath: "\(temp)/movie" + NSProcessInfo.processInfo().globallyUniqueString + ".mp4")!;
+        var outputURL : NSURL = NSURL(fileURLWithPath: "\(temp)/movie" + NSProcessInfo.processInfo().globallyUniqueString + ".mp4")!
+        localData.currentVideoURL = outputURL
         println("URL: \(outputURL)")
         println("what: \(outputURL.path)")
         self.movieOutput.startRecordingToOutputFileURL(outputURL, recordingDelegate: self.recordingDelegate)
@@ -105,6 +116,12 @@ class ViewController: UIViewController {
                 device.unlockForConfiguration()
             }
         }
+    }
+    
+    func presentPlaybackView() {
+        presentViewController(playbackController, animated: true, completion: {
+            println("PRESENTING THE PLAYBACK CONTROLLER HOHOH")
+        })
     }
     
     let screenWidth = UIScreen.mainScreen().bounds.size.width
