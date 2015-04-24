@@ -12,10 +12,12 @@ import AVFoundation
 class PlaybackController: UIViewController {
     
     var player: AVPlayer?
+    var playerLayer: AVPlayerLayer?
     var mainView: ViewController!
     @IBOutlet var doneButton: UIButton!
     
     var didLoad = false
+    var firstLoad = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,15 +36,21 @@ class PlaybackController: UIViewController {
         player = AVPlayer(URL: localData.currentVideoURL)
         
         if player != nil {
-            var playerLayer = AVPlayerLayer(player: player)
-            playerLayer.frame = self.view.frame
-            playerLayer.cornerRadius = 10
+            playerLayer = AVPlayerLayer(player: player)
+            playerLayer?.frame = self.view.frame
+            playerLayer?.cornerRadius = 10
+            playerLayer?.removeFromSuperlayer()
             self.view.layer.insertSublayer(playerLayer, below: doneButton.layer)
+            
+            // TODO: confirm that this cleans up observer
+            NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+            // Add a new observer
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "replayVideo", name: AVPlayerItemDidPlayToEndTimeNotification, object: player?.currentItem)
+            
             player?.seekToTime(kCMTimeZero)
             player?.play()
             // Code to allow looping
             player?.actionAtItemEnd = AVPlayerActionAtItemEnd.None
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "replayVideo", name: AVPlayerItemDidPlayToEndTimeNotification, object: player?.currentItem)
         }
     }
     
