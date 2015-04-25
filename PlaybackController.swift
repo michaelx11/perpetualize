@@ -79,9 +79,7 @@ class PlaybackController: UIViewController {
     
     func rewindSegue() {
         println("GOT CALLED YO")
-        self.dismissViewControllerAnimated(false, completion: {
-            println("yeah dismissed yeah")
-        })
+        self.navigationController?.popViewControllerAnimated(false)
     }
     
     override func didReceiveMemoryWarning() {

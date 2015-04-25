@@ -9,8 +9,9 @@
 import UIKit
 import AVFoundation
 
-let requestManager = RequestManager();
-let localData = FastLocalData();
+let requestManager = RequestManager()
+let localData = FastLocalData()
+let globalNavigationController = UINavigationController()
 
 class ViewController: UIViewController {
     
@@ -55,6 +56,7 @@ class ViewController: UIViewController {
         playbackController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PlaybackController") as! PlaybackController
         // HACK: give a reference to allow playback to present our view when done
         playbackController.mainView = self
+        
     }
 
     func beginSession() {
@@ -117,9 +119,7 @@ class ViewController: UIViewController {
     }
     
     func presentPlaybackView() {
-        presentViewController(playbackController, animated: false, completion: {
-            println("PRESENTING THE PLAYBACK CONTROLLER HOHOH")
-        })
+        self.navigationController?.pushViewController(playbackController, animated: false)
     }
     
     let screenWidth = UIScreen.mainScreen().bounds.size.width
