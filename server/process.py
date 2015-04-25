@@ -11,10 +11,11 @@ if len(sys.argv) <= 1:
 
 print 'processing video ... ', str(sys.argv[1])
 
+DEBUG = False
 INNAME = sys.argv[1]
 OUTNAME = sys.argv[2]
 
-if len(sys.argv) > 2:
+if len(sys.argv) > 3:
   print 'DEBUG MODE' + str(sys.argv)
   DEBUG = True
 
@@ -196,7 +197,6 @@ clip.write_gif(OUTNAME)
 # # cv2.imshow('frame2', hf2)
 
 if DEBUG:
-
   print data
 
   plt.plot(data, '.')
