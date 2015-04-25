@@ -2,7 +2,7 @@ import sys
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-import fft_sin_fit as sf
+import norman_fit as sf
 from moviepy.editor import *
 
 if len(sys.argv) <= 1:
@@ -59,8 +59,9 @@ while(cap.isOpened()):
         distTrack.append(distSum)
         # cv2.circle(frame, (10,10), int(distSum), (0, 255, 255), -1)
 
-      for i in kp1:
-        cv2.circle(frame, (int(i.pt[0]), int(i.pt[1])), 3, (255, 255, 255), -1)
+      if DEBUG:
+        for i in kp1:
+          cv2.circle(frame, (int(i.pt[0]), int(i.pt[1])), 3, (255, 255, 255), -1)
 
       # if SHOW_VIDEO:
       #   cv2.imshow('frame', frame)
@@ -75,7 +76,11 @@ data = distTrack
 
 (data_fit, period, phase) = sf.sin_fit(data)
 
+print data
+
 print data_fit
+print 'num frames'
+print len(videoFrames)
 
 print 'best matches for frames: '
 print int(phase)
@@ -86,8 +91,8 @@ print int(phase+period)
 
 ## TESTING HOMOGRAPHY OF TWO FRAMES
 
-hf1 = videoFrames[int(phase)]
-hf2 = videoFrames[int(phase+period)]
+# hf1 = videoFrames[int(phase)]
+# hf2 = videoFrames[int(phase+period)]
 
 # start = int(phase)
 # end = int(phase+period)
@@ -111,12 +116,13 @@ while end < len(videoFrames):
   matches = sorted(matches, key = lambda x:x.distance)
 
   distSum = 0
-  for i in matches[:10]:
-    distSum += i.distance
+  if len(matches) > 40:
+    for i in matches[:40]:
+      distSum += i.distance
 
-  if distSum < lowestDist:
-    lowestPair = (start, end)
-    lowestDist = distSum
+    if distSum < lowestDist:
+      lowestPair = (start, end)
+      lowestDist = distSum
 
   start += 1
   end += 1
@@ -188,9 +194,11 @@ clip.write_gif(OUTNAME)
 # cv2.imshow('frame2', hf2)
 
 # # cv2.imshow('frame2', hf2)
-print data
 
 if DEBUG:
+
+  print data
+
   plt.plot(data, '.')
   plt.plot(data_fit, label='after fitting')
   plt.show()
