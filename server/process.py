@@ -29,6 +29,46 @@ distSum = 0
 # create BFMatcher object
 bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
 
+def findUsingSimpleProcess(videoFrames):
+  MIN_NUM_MATCHES = 50
+  MIN_REQUIRED_DISTANCE = 8
+
+  # create BFMatcher object
+  bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
+  orb = cv2.ORB()
+
+  numFrames = len(videoFrames)
+  lowestDist = 999999
+  bestFrames = (0, numFrames-1)
+  bestDesc = {}
+  print 'Number of frames: ' + str(numFrames)
+  for i in range(numFrames):
+    if i < numFrames/2:
+      kp1, des1 = orb.detectAndCompute(videoFrames[i], None)
+      for j in range(numFrames - (i+1), numFrames):
+        print 'Checking: ' + str((i, j))
+        kp2, des2 = orb.detectAndCompute(videoFrames[j], None)
+        matches = bf.match(des1,des2)
+        matches = sorted(matches, key = lambda x:x.distance)
+        if len(matches) > MIN_NUM_MATCHES:
+          distSum = 0
+          for k in matches[:10]:
+            distSum += k.distance**2
+          print 'distSum: ' + str(distSum)
+          if distSum < lowestDist and abs(i-j) > MIN_REQUIRED_DISTANCE:
+            lowestDist = distSum
+            bestFrames = (i, j)
+            bestDesc['m1'] = (kp1, des1)
+            bestDesc['m2'] = (kp1, des1)
+            bestDesc['numMatches'] = len(matches)
+    else:
+      break
+
+  # print videoFrames
+  start, end = bestFrames
+  print bestDesc['numMatches']
+  return (start, end)
+
 # Match descriptors.
 while(cap.isOpened()):
     ret, frame = cap.read()
@@ -100,35 +140,79 @@ print int(phase+period)
 
 ## FIND SMALLEST DISTANCES BETWEEN TWO FRAMES OF PERIOD X APART
 
-start = int(0)
-end = int(period)
-lowestDist = 999999
-lowestPair = (0,period)
+def findUsingSimpleProcess(videoFrames):
+  MIN_NUM_MATCHES = 50
+  MIN_REQUIRED_DISTANCE = 8
 
-while end < len(videoFrames):
-  sFrame = videoFrames[start]
-  eFrame = videoFrames[end]
-    # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
+  # create BFMatcher object
+  bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
   orb = cv2.ORB()
-  kp1, des1 = orb.detectAndCompute(sFrame, None)
-  kp2, des2 = orb.detectAndCompute(eFrame, None)
-  matches = bf.match(des1,des2)
-  matches = sorted(matches, key = lambda x:x.distance)
 
-  distSum = 0
-  if len(matches) > 40:
-    for i in matches[:40]:
-      distSum += i.distance
+  numFrames = len(videoFrames)
+  lowestDist = 999999
+  bestFrames = (0, numFrames-1)
+  bestDesc = {}
+  print 'Number of frames: ' + str(numFrames)
+  for i in range(numFrames):
+    if i < numFrames/2:
+      kp1, des1 = orb.detectAndCompute(videoFrames[i], None)
+      for j in range(numFrames - (i+1), numFrames):
+        print 'Checking: ' + str((i, j))
+        kp2, des2 = orb.detectAndCompute(videoFrames[j], None)
+        matches = bf.match(des1,des2)
+        matches = sorted(matches, key = lambda x:x.distance)
+        if len(matches) > MIN_NUM_MATCHES:
+          distSum = 0
+          for k in matches[:10]:
+            distSum += k.distance**2
+          print 'distSum: ' + str(distSum)
+          if distSum < lowestDist and abs(i-j) > MIN_REQUIRED_DISTANCE:
+            lowestDist = distSum
+            bestFrames = (i, j)
+            bestDesc['m1'] = (kp1, des1)
+            bestDesc['m2'] = (kp1, des1)
+            bestDesc['numMatches'] = len(matches)
+    else:
+      break
 
-    if distSum < lowestDist:
-      lowestPair = (start, end)
-      lowestDist = distSum
+  # print videoFrames
+  start, end = bestFrames
+  print bestDesc['numMatches']
+  return (start, end)
 
-  start += 1
-  end += 1
 
-start, end = lowestPair
+if period >= len(videoFrames):
+  start, end = findUsingSimpleProcess(videoFrames)
+else:
+  start = int(0)
+  end = int(period)
+  lowestDist = 999999
+  lowestPair = (0,period)
+
+  while end < len(videoFrames):
+    sFrame = videoFrames[start]
+    eFrame = videoFrames[end]
+      # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    orb = cv2.ORB()
+    kp1, des1 = orb.detectAndCompute(sFrame, None)
+    kp2, des2 = orb.detectAndCompute(eFrame, None)
+    matches = bf.match(des1,des2)
+    matches = sorted(matches, key = lambda x:x.distance)
+
+    distSum = 0
+    if len(matches) > 40:
+      for i in matches[:40]:
+        distSum += i.distance
+
+      if distSum < lowestDist:
+        lowestPair = (start, end)
+        lowestDist = distSum
+
+    start += 1
+    end += 1
+
+  start, end = lowestPair
 
 finalVideo = videoFrames[start:end]
 dimensions = finalVideo[0].shape[1], finalVideo[0].shape[0]
@@ -202,6 +286,12 @@ if DEBUG:
   plt.plot(data, '.')
   plt.plot(data_fit, label='after fitting')
   plt.show()
+
+
+# If the period is too large, revert to using the simple method of finding matches
+# TODO: convert this to simple image matching
+
+
 
 
 
