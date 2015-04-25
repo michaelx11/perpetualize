@@ -35,3 +35,5 @@ Carthage/Build
 *.DS_Store
 node_modules/
 uploads/
+*.pyc
+exports/

@@ -2,7 +2,7 @@ import sys
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-import sin_fit as sf
+import fft_sin_fit as sf
 from moviepy.editor import *
 
 if len(sys.argv) <= 1:
