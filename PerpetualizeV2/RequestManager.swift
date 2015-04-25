@@ -128,6 +128,7 @@ class RequestManager {
                 if(err != nil) {
                     // If there is an error parsing JSON, print it to the console
                     println("JSON Error \(err!.localizedDescription)")
+                    handler(getURL: nil, error: err!.localizedDescription)
                     return;
                 }
                 if (jsonResult["error"] != nil) {
@@ -152,5 +153,45 @@ class RequestManager {
     
     func stringToNSData(string: NSString) -> NSData {
         return string.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!
+    }
+    
+    func downloadFile(remoteURL: NSURL, handler : (fileURL: NSURL?, error: NSString?) -> Void) {
+        let request = NSMutableURLRequest(URL: remoteURL)
+        request.HTTPMethod = "GET"
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: {
+            data, response, error in
+            
+            if error != nil {
+                println("ERROR: \(error)")
+                // handle error here
+                return
+            }
+            
+            var temp = NSTemporaryDirectory()
+            var localURL = NSURL(fileURLWithPath: "\(temp)/result" + NSProcessInfo.processInfo().globallyUniqueString + ".gif")!
+            
+            var err: NSError?
+            
+            if let resultData : NSData = data {
+                if(err != nil) {
+                    // If there is an error parsing JSON, print it to the console
+                    println("JSON Error \(err!.localizedDescription)")
+                    handler(fileURL: nil, error: err!.localizedDescription)
+                    return;
+                }
+                
+                // Got a result! write it and pass the fileURL back
+                dispatch_async(dispatch_get_main_queue(), {
+                    resultData.writeToURL(localURL, atomically: true)
+                    handler(fileURL: localURL, error: nil)
+                })
+            } else {
+                println("FAILED to download file")
+                dispatch_async(dispatch_get_main_queue(), {
+                    handler(fileURL: nil, error: "Can't reach server!")
+                })
+            }
+        })
+        task.resume()
     }
 }

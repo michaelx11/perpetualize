@@ -1,15 +1,16 @@
 //
-//  PlaybackController.swift
+//  LoopedPlaybackController.swift
 //  PerpetualizeV2
 //
-//  Created by Michael Xu on 4/24/15.
+//  Created by Michael Xu on 4/25/15.
 //  Copyright (c) 2015 Michael Xu. All rights reserved.
 //
 
 import UIKit
 import AVFoundation
 
-class PlaybackController: UIViewController {
+class LoopedPlaybackController: UIViewController {
+
     
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
@@ -23,7 +24,7 @@ class PlaybackController: UIViewController {
         super.viewDidLoad()
         println("DID LOAD")
         // Do any additional setup after loading the view, typically from a nib.
-
+        
         didLoad = true
         refreshPlayer()
     }
@@ -88,4 +89,5 @@ class PlaybackController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
 }

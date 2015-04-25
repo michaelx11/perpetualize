@@ -75,7 +75,6 @@ class ViewController: UIViewController {
         
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer?.cornerRadius = 10.0
-//        self.view.layer.addSublayer(previewLayer)
         self.view.layer.insertSublayer(previewLayer, below: self.recordButton.layer);
         previewLayer?.frame = self.view.layer.frame
         previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill;
