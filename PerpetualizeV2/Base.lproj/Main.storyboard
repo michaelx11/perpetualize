@@ -211,18 +211,136 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mSN-QQ-9sT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--LoopedPlayback Controller-->
+        <!--Result Playback Controller-->
         <scene sceneID="b8P-RF-sQH">
             <objects>
-                <viewController id="83m-jC-hBE" userLabel="LoopedPlayback Controller" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResultPlaybackController" id="83m-jC-hBE" userLabel="Result Playback Controller" customClass="ResultPlaybackController" customModule="PerpetualizeV2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NQb-bE-6MX"/>
                         <viewControllerLayoutGuide type="bottom" id="xK2-Yu-4RQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Jjw-KA-ehR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2B-9d-abl">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="124" id="ZQe-q0-OqR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ZQe-q0-OqR"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="ZQe-q0-OqR"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nsZ-bZ-Lfa">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="69" id="Ij2-mU-J41"/>
+                                    <constraint firstAttribute="height" constant="30" id="SZt-yW-k9k"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Ij2-mU-J41"/>
+                                        <exclude reference="SZt-yW-k9k"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Ij2-mU-J41"/>
+                                        <include reference="SZt-yW-k9k"/>
+                                    </mask>
+                                </variation>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vs1-y0-Jz7">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="74" id="0id-4p-uxL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0id-4p-uxL"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="0id-4p-uxL"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="segueToMainView" destination="83m-jC-hBE" eventType="touchDown" id="q7U-7u-YVJ"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nsZ-bZ-Lfa" firstAttribute="baseline" secondItem="Vs1-y0-Jz7" secondAttribute="baseline" id="4Be-Na-dwm"/>
+                            <constraint firstItem="xK2-Yu-4RQ" firstAttribute="top" secondItem="d2B-9d-abl" secondAttribute="bottom" priority="750" constant="383" id="6Ee-Yj-EVm"/>
+                            <constraint firstItem="nsZ-bZ-Lfa" firstAttribute="baseline" secondItem="Vs1-y0-Jz7" secondAttribute="firstBaseline" id="7pt-HP-TVD"/>
+                            <constraint firstItem="d2B-9d-abl" firstAttribute="top" secondItem="NQb-bE-6MX" secondAttribute="bottom" constant="362" id="DAg-oX-qPm"/>
+                            <constraint firstItem="d2B-9d-abl" firstAttribute="centerX" secondItem="Jjw-KA-ehR" secondAttribute="centerX" id="U9b-yh-fZE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Vs1-y0-Jz7" secondAttribute="trailing" constant="53" id="do9-Af-pYg"/>
+                            <constraint firstItem="nsZ-bZ-Lfa" firstAttribute="top" secondItem="Vs1-y0-Jz7" secondAttribute="top" id="fRE-SZ-ckK"/>
+                            <constraint firstItem="xK2-Yu-4RQ" firstAttribute="top" secondItem="nsZ-bZ-Lfa" secondAttribute="bottom" constant="113" id="ffl-xP-zgb"/>
+                            <constraint firstItem="nsZ-bZ-Lfa" firstAttribute="leading" secondItem="Jjw-KA-ehR" secondAttribute="leadingMargin" constant="64" id="r3K-e2-oGs"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="d2B-9d-abl"/>
+                                <exclude reference="nsZ-bZ-Lfa"/>
+                                <exclude reference="Vs1-y0-Jz7"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="DAg-oX-qPm"/>
+                                <exclude reference="U9b-yh-fZE"/>
+                                <exclude reference="4Be-Na-dwm"/>
+                                <exclude reference="7pt-HP-TVD"/>
+                                <exclude reference="fRE-SZ-ckK"/>
+                                <exclude reference="r3K-e2-oGs"/>
+                                <exclude reference="do9-Af-pYg"/>
+                                <exclude reference="6Ee-Yj-EVm"/>
+                                <exclude reference="ffl-xP-zgb"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="d2B-9d-abl"/>
+                                <include reference="nsZ-bZ-Lfa"/>
+                                <include reference="Vs1-y0-Jz7"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="DAg-oX-qPm"/>
+                                <include reference="U9b-yh-fZE"/>
+                                <include reference="4Be-Na-dwm"/>
+                                <include reference="7pt-HP-TVD"/>
+                                <include reference="fRE-SZ-ckK"/>
+                                <include reference="r3K-e2-oGs"/>
+                                <include reference="do9-Af-pYg"/>
+                                <include reference="6Ee-Yj-EVm"/>
+                                <include reference="ffl-xP-zgb"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="doneButton" destination="nsZ-bZ-Lfa" id="cML-xn-Uhu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sVY-Bf-Q3J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

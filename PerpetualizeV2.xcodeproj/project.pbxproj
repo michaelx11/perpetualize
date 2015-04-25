@@ -18,7 +18,7 @@
 		F46C26BD1AE9CDFA00640866 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46C26BC1AE9CDFA00640866 /* MobileCoreServices.framework */; };
 		F46C26CB1AEACDBA00640866 /* PlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C26CA1AEACDBA00640866 /* PlaybackController.swift */; };
 		F46C26CD1AEACF5100640866 /* FastLocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C26CC1AEACF5100640866 /* FastLocalData.swift */; };
-		F46C26CF1AEC20F200640866 /* LoopedPlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C26CE1AEC20F200640866 /* LoopedPlaybackController.swift */; };
+		F46C26CF1AEC20F200640866 /* ResultPlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C26CE1AEC20F200640866 /* ResultPlaybackController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +47,7 @@
 		F46C26BC1AE9CDFA00640866 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F46C26CA1AEACDBA00640866 /* PlaybackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaybackController.swift; path = ../PlaybackController.swift; sourceTree = "<group>"; };
 		F46C26CC1AEACF5100640866 /* FastLocalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FastLocalData.swift; sourceTree = "<group>"; };
-		F46C26CE1AEC20F200640866 /* LoopedPlaybackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopedPlaybackController.swift; sourceTree = "<group>"; };
+		F46C26CE1AEC20F200640866 /* ResultPlaybackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultPlaybackController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +94,7 @@
 				F46C26981AE97A2C00640866 /* AppDelegate.swift */,
 				F46C269A1AE97A2C00640866 /* ViewController.swift */,
 				F46C26CA1AEACDBA00640866 /* PlaybackController.swift */,
-				F46C26CE1AEC20F200640866 /* LoopedPlaybackController.swift */,
+				F46C26CE1AEC20F200640866 /* ResultPlaybackController.swift */,
 				F46C26B81AE9AD0000640866 /* RecordingDelegate.swift */,
 				F46C26BA1AE9C89800640866 /* RequestManager.swift */,
 				F46C26CC1AEACF5100640866 /* FastLocalData.swift */,
@@ -233,7 +233,7 @@
 			files = (
 				F46C269B1AE97A2C00640866 /* ViewController.swift in Sources */,
 				F46C26CB1AEACDBA00640866 /* PlaybackController.swift in Sources */,
-				F46C26CF1AEC20F200640866 /* LoopedPlaybackController.swift in Sources */,
+				F46C26CF1AEC20F200640866 /* ResultPlaybackController.swift in Sources */,
 				F46C26991AE97A2C00640866 /* AppDelegate.swift in Sources */,
 				F46C26CD1AEACF5100640866 /* FastLocalData.swift in Sources */,
 				F46C26B91AE9AD0000640866 /* RecordingDelegate.swift in Sources */,

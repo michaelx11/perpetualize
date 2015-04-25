@@ -70,7 +70,9 @@ class PlaybackController: UIViewController {
             println("WROTE THE VIDEO")
             requestManager.uploadMovie(outputURL, handler: {(url: NSString?, error: NSString?) -> Void in
                 println("YEAHHHHHHH \(outputURL)");
-                self.rewindSegue()
+                localData.downloadedVideoURL = String(url!)
+                self.resultVideoSegue()
+//                self.rewindSegue()
             })
         } else {
             rewindSegue()
@@ -80,6 +82,11 @@ class PlaybackController: UIViewController {
     func rewindSegue() {
         println("GOT CALLED YO")
         self.navigationController?.popViewControllerAnimated(false)
+    }
+    
+    func resultVideoSegue() {
+        self.mainView.resultPlaybackController.reset()
+        self.navigationController?.pushViewController(self.mainView.resultPlaybackController, animated: false)
     }
     
     override func didReceiveMemoryWarning() {

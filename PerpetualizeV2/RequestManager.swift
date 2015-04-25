@@ -117,6 +117,7 @@ class RequestManager {
             if error != nil {
                 println("ERROR: \(error)")
                 // handle error here
+                handler(getURL: nil, error: error.localizedDescription)
                 return
             }
             
@@ -155,20 +156,42 @@ class RequestManager {
         return string.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!
     }
     
-    func downloadFile(remoteURL: NSURL, handler : (fileURL: NSURL?, error: NSString?) -> Void) {
-        let request = NSMutableURLRequest(URL: remoteURL)
-        request.HTTPMethod = "GET"
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: {
+    func downloadFile(remoteURL: String, handler : (fileURL: NSURL?, error: NSString?) -> Void) {
+        var request: NSMutableURLRequest?
+        if let goodURL = NSURL(string: "http://\(host)/" + remoteURL) {
+            request = NSMutableURLRequest(URL: goodURL)
+        } else {
+            handler(fileURL: nil, error: "Could not make url string into request")
+            return
+        }
+        
+        println(request?.URL)
+        
+        request!.HTTPMethod = "GET"
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request!, completionHandler: {
             data, response, error in
             
             if error != nil {
                 println("ERROR: \(error)")
                 // handle error here
+                handler(fileURL: nil, error: error.localizedDescription)
+                return
+            }
+            
+            if let httpResp: NSHTTPURLResponse = response as? NSHTTPURLResponse {
+                if httpResp.statusCode != 200 {
+                    println("ERROR: Response code is not 200")
+                    handler(fileURL: nil, error: "Response code is not 200")
+                    return
+                }
+            } else {
+                println("ERROR: Response is not NSHTTPURLResponse")
+                handler(fileURL: nil, error: "Response is not NSHTTPURLResponse")
                 return
             }
             
             var temp = NSTemporaryDirectory()
-            var localURL = NSURL(fileURLWithPath: "\(temp)/result" + NSProcessInfo.processInfo().globallyUniqueString + ".gif")!
+            var localURL = NSURL(fileURLWithPath: "\(temp)/result" + NSProcessInfo.processInfo().globallyUniqueString + ".mp4")!
             
             var err: NSError?
             

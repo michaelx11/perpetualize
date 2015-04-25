@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     let captureSession = AVCaptureSession()
     let recordingDelegate : RecordingDelegate = RecordingDelegate()
     var playbackController : PlaybackController!
+    var resultPlaybackController : ResultPlaybackController!
     var previewLayer : AVCaptureVideoPreviewLayer?
     @IBOutlet var recordButton : UIButton!
     
@@ -54,6 +55,7 @@ class ViewController: UIViewController {
         
         // Get playback controller
         playbackController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PlaybackController") as! PlaybackController
+        resultPlaybackController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ResultPlaybackController") as! ResultPlaybackController
         // HACK: give a reference to allow playback to present our view when done
         playbackController.mainView = self
         
