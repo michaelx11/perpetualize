@@ -181,7 +181,7 @@ def findUsingSimpleProcess(videoFrames):
   return (start, end)
 
 
-if period >= len(videoFrames):
+if period >= (len(videoFrames) * 0.75):
   start, end = findUsingSimpleProcess(videoFrames)
 else:
   start = int(0)
