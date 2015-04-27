@@ -3,8 +3,12 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 import norman_fit as sf
+
+import smoother
+
 from moviepy.editor import *
 
+TRANSITION_FRAMES = 3
 DEBUG = False
 INNAME = sys.argv[1]
 timestamp = sys.argv[2]
@@ -215,7 +219,9 @@ else:
 
   start, end = lowestPair
 
-finalVideo = videoFrames[start:end]
+trimVideo = videoFrames[start:(end+TRANSITION_FRAMES-1)]
+finalVideo = smoother.smoothVideo(trimVideo, TRANSITION_FRAMES)
+
 dimensions = finalVideo[0].shape[1], finalVideo[0].shape[0]
 fourcc = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')
 
