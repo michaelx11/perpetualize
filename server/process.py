@@ -5,15 +5,15 @@ import matplotlib.pyplot as plt
 import norman_fit as sf
 from moviepy.editor import *
 
+DEBUG = False
+INNAME = sys.argv[1]
+timestamp = sys.argv[2]
+
 if len(sys.argv) <= 1:
   print 'python process.py [input] [output] [optional: debug]'
   exit()
 
 print 'processing video ... ', str(sys.argv[1])
-
-DEBUG = False
-INNAME = sys.argv[1]
-OUTNAME = sys.argv[2]
 
 if len(sys.argv) > 3:
   print 'DEBUG MODE' + str(sys.argv)
@@ -153,6 +153,7 @@ def findUsingSimpleProcess(videoFrames):
   bestFrames = (0, numFrames-1)
   bestDesc = {}
   print 'Number of frames: ' + str(numFrames)
+
   for i in range(numFrames):
     if i < numFrames/2:
       kp1, des1 = orb.detectAndCompute(videoFrames[i], None)
@@ -218,7 +219,7 @@ finalVideo = videoFrames[start:end]
 dimensions = finalVideo[0].shape[1], finalVideo[0].shape[0]
 fourcc = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')
 
-vw = cv2.VideoWriter('testout.mp4', fourcc, 24, dimensions, True)
+vw = cv2.VideoWriter('uploads/' + timestamp + '/_.mp4', fourcc, 24, dimensions, True)
 
 for i in finalVideo: 
   vw.write(i)
@@ -229,9 +230,8 @@ vw = None
 cap.release()
 cv2.destroyAllWindows()
 
-clip = (VideoFileClip("testout.mp4"))
-clip.write_gif(OUTNAME)
-
+clip = (VideoFileClip('uploads/' + timestamp + '/_.mp4'))
+clip.write_gif('uploads/' + timestamp + '/_.gif')
 
 # sift = cv2.SIFT()
 
