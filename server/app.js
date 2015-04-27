@@ -2,10 +2,14 @@ var express = require("express");
 var multer = require('multer');
 var exec = require('child_process').exec, child;
 var fs = require('fs');
+var exphbs  = require('express-handlebars');
 var app = express();
 var done = false;
 
 app.set('port', 8000);
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 app.use(multer({ dest: 'uploads/',
  rename: function (fieldname, filename) {
@@ -57,8 +61,13 @@ app.get('/', function(req,res){
 });
 
 app.get('/s/:id', function(req,res){
-  console.log(req.params.id);
-  res.sendfile("index.html");
+  id = req.params.id
+  console.log(id);
+  if (fs.existsSync('uploads/' + id + '/')) {
+    res.render("single", {id: id});
+  } else {
+    res.render("invalid");
+  }
 });
 
 app.post('/video', function(req,res){
