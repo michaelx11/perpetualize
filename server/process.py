@@ -223,7 +223,7 @@ else:
   start, end = lowestPair
 
 numTransitionFrames = 0.05 * (end-start)
-numTransitionFrames = max(min(numTransitionFrames, 15), 3)
+numTransitionFrames = int(max(min(numTransitionFrames, 15), 3))
 
 trimVideo = videoFrames[start:(end+numTransitionFrames-1)]
 finalVideo = smoother.smoothVideo(trimVideo, numTransitionFrames)

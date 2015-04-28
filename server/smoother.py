@@ -16,7 +16,7 @@ def smoothVideo(video, p):
   w = d
   for i in range(p):
     print i, w
-    v1, v2 = transformFrames(video[i], video[-(p-i)], w)
+    v1, v2 = noTransformFrames(video[i], video[-(p-i)], w)
     outputVideo[i] = v1*w + v2*(1-w)
     # transformFrames(video[i], video[-(p-i)], 0.5)
     w += d
@@ -64,32 +64,35 @@ def transformFrames(f1, f2, w):
   src_pts = np.float32([ kp1[m.queryIdx].pt for m in good ]).reshape(-1,1,2)
   dst_pts = np.float32([ kp2[m.trainIdx].pt for m in good ]).reshape(-1,1,2)
 
-  M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC,5.0)
-  Mp, mask2 = cv2.findHomography(dst_pts, src_pts, cv2.RANSAC,5.0)
-  matchesMask = mask.ravel().tolist()
-  h,wi,c = f1.shape
+  if len(src_pts) >= 4 and len(dst_pts) >= 4:
+    M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC,5.0)
+    Mp, mask2 = cv2.findHomography(dst_pts, src_pts, cv2.RANSAC,5.0)
+    matchesMask = mask.ravel().tolist()
+    h,wi,c = f1.shape
 
-  # this bit of logic I need to figure out why I needed to add it
-  # it works, I have no idea why
-  w = 1-w
+    # this bit of logic I need to figure out why I needed to add it
+    # it works, I have no idea why
+    w = 1-w
 
-  weighted = np.array([1,w,w,w,1,w,1,1,1]).reshape((3,3))
-  M = np.multiply(M, weighted)
-  warped = cv2.warpPerspective(f1, M, (wi, h))
+    weighted = np.array([1,w,w,w,1,w,1,1,1]).reshape((3,3))
+    M = np.multiply(M, weighted)
+    warped = cv2.warpPerspective(f1, M, (wi, h))
 
-  wp = 1-w
-  weightedp = np.array([1,wp,wp,wp,1,wp,1,1,1]).reshape((3,3))
-  Mp = np.multiply(Mp, weightedp)
-  pwarped = cv2.warpPerspective(f2, Mp, (wi, h))
+    wp = 1-w
+    weightedp = np.array([1,wp,wp,wp,1,wp,1,1,1]).reshape((3,3))
+    Mp = np.multiply(Mp, weightedp)
+    pwarped = cv2.warpPerspective(f2, Mp, (wi, h))
 
-  # cv2.imshow('warped', warped)
-  # cv2.imshow('paritalwarped', pwarped)
+    # cv2.imshow('warped', warped)
+    # cv2.imshow('paritalwarped', pwarped)
 
-  # while True:
-  #   if cv2.waitKey(1) & 0xFF == ord('q'):
-  #     break
+    # while True:
+    #   if cv2.waitKey(1) & 0xFF == ord('q'):
+    #     break
 
-  return warped, pwarped
+    return warped, pwarped
+  else:
+    return f1, f2
 
     # N = np.multiply(M, half)
 
