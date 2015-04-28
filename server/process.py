@@ -189,38 +189,44 @@ def findUsingSimpleProcess(videoFrames):
 if period >= (len(videoFrames) * 0.75):
   start, end = findUsingSimpleProcess(videoFrames)
 else:
-  start = int(0)
-  end = int(period)
   lowestDist = 999999
   lowestPair = (0,period)
+  constantPeriod = period
+  while period < len(videoFrames):
+    start = int(0)
+    end = int(period)
+    while end < len(videoFrames):
+      sFrame = videoFrames[start]
+      eFrame = videoFrames[end]
+        # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-  while end < len(videoFrames):
-    sFrame = videoFrames[start]
-    eFrame = videoFrames[end]
-      # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+      orb = cv2.ORB()
+      kp1, des1 = orb.detectAndCompute(sFrame, None)
+      kp2, des2 = orb.detectAndCompute(eFrame, None)
+      matches = bf.match(des1,des2)
+      matches = sorted(matches, key = lambda x:x.distance)
 
-    orb = cv2.ORB()
-    kp1, des1 = orb.detectAndCompute(sFrame, None)
-    kp2, des2 = orb.detectAndCompute(eFrame, None)
-    matches = bf.match(des1,des2)
-    matches = sorted(matches, key = lambda x:x.distance)
+      distSum = 0
+      if len(matches) > 40:
+        for i in matches[:40]:
+          distSum += i.distance
 
-    distSum = 0
-    if len(matches) > 40:
-      for i in matches[:40]:
-        distSum += i.distance
+        if distSum < lowestDist:
+          lowestPair = (start, end)
+          lowestDist = distSum
 
-      if distSum < lowestDist:
-        lowestPair = (start, end)
-        lowestDist = distSum
+      start += 1
+      end += 1
+    period += constantPeriod
 
-    start += 1
-    end += 1
 
   start, end = lowestPair
 
-trimVideo = videoFrames[start:(end+TRANSITION_FRAMES-1)]
-finalVideo = smoother.smoothVideo(trimVideo, TRANSITION_FRAMES)
+numTransitionFrames = 0.05 * (end-start)
+numTransitionFrames = max(min(numTransitionFrames, 15), 3)
+
+trimVideo = videoFrames[start:(end+numTransitionFrames-1)]
+finalVideo = smoother.smoothVideo(trimVideo, numTransitionFrames)
 
 dimensions = finalVideo[0].shape[1], finalVideo[0].shape[0]
 fourcc = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')

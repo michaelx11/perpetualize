@@ -30,7 +30,9 @@ while(cap.isOpened()):
     break
   f.append(frame)
 
-# http://www.pyimagesearch.com/2014/08/25/4-point-opencv-getperspective-transform-example/
+# This method... doesn't transform the frames
+def noTransformFrames(f1, f2, w):
+  return f1, f2
 
 def transformFrames(f1, f2, w):
 
@@ -70,7 +72,7 @@ def transformFrames(f1, f2, w):
   # this bit of logic I need to figure out why I needed to add it
   # it works, I have no idea why
   w = 1-w
-  
+
   weighted = np.array([1,w,w,w,1,w,1,1,1]).reshape((3,3))
   M = np.multiply(M, weighted)
   warped = cv2.warpPerspective(f1, M, (wi, h))
