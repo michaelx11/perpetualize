@@ -3,6 +3,7 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 import norman_fit as sf
+import random
 
 import smoother
 
@@ -242,8 +243,11 @@ vw = None
 cap.release()
 cv2.destroyAllWindows()
 
-clip = (VideoFileClip('uploads/' + timestamp + '/_.mp4'))
-clip.write_gif('uploads/' + timestamp + '/_.gif')
+baseDir = 'uploads/' + timestamp + '/'
+clip = (VideoFileClip(baseDir + '_.mp4'))
+clip.write_gif(baseDir + '_.gif')
+
+cv2.imwrite(baseDir + 'thumbnail.png', finalVideo[random.randint(0,int(end-start-1))], (cv2.cv.CV_IMWRITE_PNG_COMPRESSION, 8))
 
 # sift = cv2.SIFT()
 

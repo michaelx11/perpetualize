@@ -9,6 +9,7 @@ var done = false;
 app.set('port', 8000);
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+app.use("/", express.static(__dirname + "/public"));
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
 app.use(multer({ dest: 'uploads/',
