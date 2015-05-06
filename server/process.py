@@ -247,7 +247,7 @@ baseDir = 'uploads/' + timestamp + '/'
 clip = (VideoFileClip(baseDir + '_.mp4'))
 clip.write_gif(baseDir + '_.gif')
 
-cv2.imwrite(baseDir + 'thumbnail.png', finalVideo[random.randint(0,int(end-start-1))], (cv2.cv.CV_IMWRITE_PNG_COMPRESSION, 8))
+cv2.imwrite(baseDir + 'thumbnail.png', finalVideo[random.randint(0,int(end-start-2))], (cv2.cv.CV_IMWRITE_PNG_COMPRESSION, 8))
 
 # sift = cv2.SIFT()
 
