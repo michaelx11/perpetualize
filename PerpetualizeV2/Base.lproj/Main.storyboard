@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LIF-K1-rbP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LIF-K1-rbP">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -82,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1255.5" y="939"/>
+            <point key="canvasLocation" x="1219" y="1635"/>
         </scene>
         <!--Playback Controller-->
         <scene sceneID="pxf-eB-SfO">
@@ -310,13 +310,13 @@
                             <mask key="constraints">
                                 <exclude reference="DAg-oX-qPm"/>
                                 <exclude reference="U9b-yh-fZE"/>
+                                <exclude reference="6Ee-Yj-EVm"/>
+                                <exclude reference="ffl-xP-zgb"/>
+                                <exclude reference="do9-Af-pYg"/>
                                 <exclude reference="4Be-Na-dwm"/>
                                 <exclude reference="7pt-HP-TVD"/>
                                 <exclude reference="fRE-SZ-ckK"/>
                                 <exclude reference="r3K-e2-oGs"/>
-                                <exclude reference="do9-Af-pYg"/>
-                                <exclude reference="6Ee-Yj-EVm"/>
-                                <exclude reference="ffl-xP-zgb"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -328,13 +328,13 @@
                             <mask key="constraints">
                                 <include reference="DAg-oX-qPm"/>
                                 <include reference="U9b-yh-fZE"/>
+                                <include reference="6Ee-Yj-EVm"/>
+                                <include reference="ffl-xP-zgb"/>
+                                <include reference="do9-Af-pYg"/>
                                 <include reference="4Be-Na-dwm"/>
                                 <include reference="7pt-HP-TVD"/>
                                 <include reference="fRE-SZ-ckK"/>
                                 <include reference="r3K-e2-oGs"/>
-                                <include reference="do9-Af-pYg"/>
-                                <include reference="6Ee-Yj-EVm"/>
-                                <include reference="ffl-xP-zgb"/>
                             </mask>
                         </variation>
                     </view>
