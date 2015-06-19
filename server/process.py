@@ -3,17 +3,22 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 import norman_fit as sf
+import random
+
+import smoother
+
 from moviepy.editor import *
+
+TRANSITION_FRAMES = 3
+DEBUG = False
+INNAME = sys.argv[1]
+timestamp = sys.argv[2]
 
 if len(sys.argv) <= 1:
   print 'python process.py [input] [output] [optional: debug]'
   exit()
 
 print 'processing video ... ', str(sys.argv[1])
-
-DEBUG = False
-INNAME = sys.argv[1]
-OUTNAME = sys.argv[2]
 
 if len(sys.argv) > 3:
   print 'DEBUG MODE' + str(sys.argv)
@@ -153,6 +158,7 @@ def findUsingSimpleProcess(videoFrames):
   bestFrames = (0, numFrames-1)
   bestDesc = {}
   print 'Number of frames: ' + str(numFrames)
+
   for i in range(numFrames):
     if i < numFrames/2:
       kp1, des1 = orb.detectAndCompute(videoFrames[i], None)
@@ -181,44 +187,52 @@ def findUsingSimpleProcess(videoFrames):
   return (start, end)
 
 
-if period >= len(videoFrames):
+if period >= (len(videoFrames) * 0.75):
   start, end = findUsingSimpleProcess(videoFrames)
 else:
-  start = int(0)
-  end = int(period)
   lowestDist = 999999
   lowestPair = (0,period)
+  constantPeriod = period
+  while period < len(videoFrames):
+    start = int(0)
+    end = int(period)
+    while end < len(videoFrames):
+      sFrame = videoFrames[start]
+      eFrame = videoFrames[end]
+        # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-  while end < len(videoFrames):
-    sFrame = videoFrames[start]
-    eFrame = videoFrames[end]
-      # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+      orb = cv2.ORB()
+      kp1, des1 = orb.detectAndCompute(sFrame, None)
+      kp2, des2 = orb.detectAndCompute(eFrame, None)
+      matches = bf.match(des1,des2)
+      matches = sorted(matches, key = lambda x:x.distance)
 
-    orb = cv2.ORB()
-    kp1, des1 = orb.detectAndCompute(sFrame, None)
-    kp2, des2 = orb.detectAndCompute(eFrame, None)
-    matches = bf.match(des1,des2)
-    matches = sorted(matches, key = lambda x:x.distance)
+      distSum = 0
+      if len(matches) > 40:
+        for i in matches[:40]:
+          distSum += i.distance
 
-    distSum = 0
-    if len(matches) > 40:
-      for i in matches[:40]:
-        distSum += i.distance
+        if distSum < lowestDist:
+          lowestPair = (start, end)
+          lowestDist = distSum
 
-      if distSum < lowestDist:
-        lowestPair = (start, end)
-        lowestDist = distSum
+      start += 1
+      end += 1
+    period += constantPeriod
 
-    start += 1
-    end += 1
 
   start, end = lowestPair
 
-finalVideo = videoFrames[start:end]
+numTransitionFrames = 0.05 * (end-start)
+numTransitionFrames = int(max(min(numTransitionFrames, 15), 3))
+
+trimVideo = videoFrames[start:(end+numTransitionFrames-1)]
+finalVideo = smoother.smoothVideo(trimVideo, numTransitionFrames)
+
 dimensions = finalVideo[0].shape[1], finalVideo[0].shape[0]
 fourcc = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')
 
-vw = cv2.VideoWriter('testout.mp4', fourcc, 24, dimensions, True)
+vw = cv2.VideoWriter('uploads/' + timestamp + '/_.mp4', fourcc, 24, dimensions, True)
 
 for i in finalVideo: 
   vw.write(i)
@@ -229,9 +243,11 @@ vw = None
 cap.release()
 cv2.destroyAllWindows()
 
-clip = (VideoFileClip("testout.mp4"))
-clip.write_gif(OUTNAME)
+baseDir = 'uploads/' + timestamp + '/'
+clip = (VideoFileClip(baseDir + '_.mp4'))
+clip.write_gif(baseDir + '_.gif')
 
+cv2.imwrite(baseDir + 'thumbnail.png', finalVideo[random.randint(0,int(end-start-2))], (cv2.cv.CV_IMWRITE_PNG_COMPRESSION, 8))
 
 # sift = cv2.SIFT()
 

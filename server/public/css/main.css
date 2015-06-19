@@ -1,0 +1,27 @@
+@charset "UTF-8";
+body {
+  background-color: #1A1918;
+  color: #eee;
+  margin: 20px; }
+
+.header {
+  background-image: url("/images/icon_on_transparent.png");
+  background-size: 60px;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 60px;
+  margin-bottom: 20px;
+  opacity: 0.5; }
+
+.content {
+  text-align: center; }
+
+img {
+  display: block; }
+
+.∞ {
+  display: inline-block;
+  padding: 4px;
+  border: #FFA613 1px solid; }
+
+/*# sourceMappingURL=main.css.map */

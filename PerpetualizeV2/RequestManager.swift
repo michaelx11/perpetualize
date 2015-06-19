@@ -9,7 +9,7 @@
 import Foundation
 import MobileCoreServices
 
-let host : NSString = "log.haus";
+let host : NSString = "util.in";
 //let host : NSString = "one.haus";
 
 class RequestManager {
@@ -139,7 +139,7 @@ class RequestManager {
                     })
                 } else {
                     dispatch_async(dispatch_get_main_queue(), {
-                         handler(getURL: jsonResult["url"] as? NSString, error: nil);
+                         handler(getURL: jsonResult["mp4_url"] as? NSString, error: nil);
                     })
                 }
             } else {
