@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LIF-K1-rbP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LIF-K1-rbP">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -126,30 +126,24 @@
                                     <action selector="saveVideo" destination="1tn-ei-qjX" eventType="touchDown" id="aTr-RM-yQj"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cEl-gK-PbT">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cEl-gK-PbT">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="87" id="RL8-LU-2Rv"/>
-                                    <constraint firstAttribute="height" constant="30" id="mkw-CT-JOB"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="87" id="scT-tS-u3E"/>
+                                    <constraint firstAttribute="width" constant="48" id="3P5-n3-uF9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Discard">
+                                <state key="normal" image="CloseWindow">
                                     <color key="titleColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="RL8-LU-2Rv"/>
-                                        <exclude reference="mkw-CT-JOB"/>
-                                        <exclude reference="scT-tS-u3E"/>
+                                        <exclude reference="3P5-n3-uF9"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="RL8-LU-2Rv"/>
-                                        <include reference="mkw-CT-JOB"/>
-                                        <include reference="scT-tS-u3E"/>
+                                        <include reference="3P5-n3-uF9"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -168,10 +162,10 @@
                             <constraint firstItem="bGg-Jy-m6l" firstAttribute="top" secondItem="ST0-Mu-KZN" secondAttribute="bottom" constant="110" id="8Lf-NF-F2Q">
                                 <variation key="heightClass=regular-widthClass=compact" constant="77"/>
                             </constraint>
-                            <constraint firstItem="cEl-gK-PbT" firstAttribute="top" secondItem="ST0-Mu-KZN" secondAttribute="top" id="Nem-SW-Pcf"/>
-                            <constraint firstItem="cEl-gK-PbT" firstAttribute="baseline" secondItem="ST0-Mu-KZN" secondAttribute="baseline" id="Ucn-ci-AHT"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="cEl-gK-PbT" secondAttribute="trailing" constant="39" id="ohC-Ka-lB2"/>
-                            <constraint firstItem="cEl-gK-PbT" firstAttribute="firstBaseline" secondItem="ST0-Mu-KZN" secondAttribute="baseline" id="zXp-xl-1mc"/>
+                            <constraint firstItem="cEl-gK-PbT" firstAttribute="trailing" secondItem="yik-M7-hCx" secondAttribute="trailingMargin" id="KMj-Dc-9uD"/>
+                            <constraint firstItem="cEl-gK-PbT" firstAttribute="top" secondItem="NwW-Pv-nKb" secondAttribute="bottom" id="n7f-v1-YIJ">
+                                <variation key="heightClass=regular-widthClass=compact" constant="13"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -179,13 +173,11 @@
                                 <exclude reference="cEl-gK-PbT"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="8Lf-NF-F2Q"/>
+                                <exclude reference="KMj-Dc-9uD"/>
+                                <exclude reference="n7f-v1-YIJ"/>
                                 <exclude reference="3kJ-aN-Mzd"/>
                                 <exclude reference="7yI-xQ-Hk9"/>
-                                <exclude reference="Nem-SW-Pcf"/>
-                                <exclude reference="Ucn-ci-AHT"/>
-                                <exclude reference="ohC-Ka-lB2"/>
-                                <exclude reference="zXp-xl-1mc"/>
+                                <exclude reference="8Lf-NF-F2Q"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -194,13 +186,11 @@
                                 <include reference="cEl-gK-PbT"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="8Lf-NF-F2Q"/>
+                                <include reference="KMj-Dc-9uD"/>
+                                <include reference="n7f-v1-YIJ"/>
                                 <include reference="3kJ-aN-Mzd"/>
                                 <include reference="7yI-xQ-Hk9"/>
-                                <include reference="Nem-SW-Pcf"/>
-                                <include reference="Ucn-ci-AHT"/>
-                                <include reference="ohC-Ka-lB2"/>
-                                <include reference="zXp-xl-1mc"/>
+                                <include reference="8Lf-NF-F2Q"/>
                             </mask>
                         </variation>
                     </view>
@@ -364,4 +354,7 @@
             <point key="canvasLocation" x="1005" y="926.25"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="CloseWindow" width="45" height="45"/>
+    </resources>
 </document>
