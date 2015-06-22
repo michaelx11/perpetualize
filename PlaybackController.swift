@@ -68,12 +68,16 @@ class PlaybackController: UIViewController {
         if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(outputURL.path) {
             UISaveVideoAtPathToSavedPhotosAlbum(outputURL.path, nil, nil, nil)
             println("WROTE THE VIDEO")
-            requestManager.uploadMovie(outputURL, handler: {(url: NSString?, error: NSString?) -> Void in
-                println("YEAHHHHHHH \(outputURL)");
-                localData.downloadedVideoURL = String(url!)
-                self.resultVideoSegue()
-//                self.rewindSegue()
-            })
+            
+            localData.downloadedVideoURL = outputURL.path
+            self.resultVideoSegue()
+            
+            // Hack for no server, just replay original ^^^
+//            requestManager.uploadMovie(outputURL, handler: {(url: NSString?, error: NSString?) -> Void in
+//                println("YEAHHHHHHH \(outputURL)");
+//                localData.downloadedVideoURL = String(url!)
+//                self.resultVideoSegue()
+//            })
         } else {
             rewindSegue()
         }

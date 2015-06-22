@@ -157,6 +157,11 @@ class RequestManager {
     }
     
     func downloadFile(remoteURL: String, handler : (fileURL: NSURL?, error: NSString?) -> Void) {
+        // BIG HACK TO ALLOW THINGS TO MOVE - just replays original video
+        
+        handler(fileURL: NSURL(fileURLWithPath: localData.downloadedVideoURL!), error: nil)
+        return
+        
         var request: NSMutableURLRequest?
         if let goodURL = NSURL(string: "http://\(host)/" + remoteURL) {
             request = NSMutableURLRequest(URL: goodURL)
