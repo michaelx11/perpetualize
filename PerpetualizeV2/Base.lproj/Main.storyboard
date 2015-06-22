@@ -19,28 +19,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3u7-Pc-8OD">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3u7-Pc-8OD">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="HPu-kW-sJh"/>
-                                    <constraint firstAttribute="width" constant="94" id="uMX-bw-cSn"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="Record">
+                                <state key="normal" image="RecordButton">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="HPu-kW-sJh"/>
-                                        <exclude reference="uMX-bw-cSn"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="HPu-kW-sJh"/>
-                                        <include reference="uMX-bw-cSn"/>
-                                    </mask>
-                                </variation>
+                                <state key="selected" image="Recording"/>
+                                <state key="highlighted" image="Recording"/>
                                 <connections>
                                     <action selector="startRecording" destination="vXZ-lx-hvc" eventType="touchDown" id="WuY-2r-frl"/>
                                     <action selector="stopRecording" destination="vXZ-lx-hvc" eventType="touchUpOutside" id="Uvd-bF-O7P"/>
@@ -50,18 +36,18 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="3u7-Pc-8OD" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" priority="750" constant="648" id="3Es-Ot-HGb"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="3u7-Pc-8OD" secondAttribute="bottom" constant="103" id="MCe-Qm-NQy"/>
-                            <constraint firstItem="3u7-Pc-8OD" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="uZD-MI-MvN"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="3u7-Pc-8OD" secondAttribute="bottom" constant="57" id="J9i-w5-Bsf">
+                                <variation key="heightClass=regular-widthClass=compact" constant="34"/>
+                            </constraint>
+                            <constraint firstItem="3u7-Pc-8OD" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="zMC-S4-v5N"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="3u7-Pc-8OD"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="MCe-Qm-NQy"/>
-                                <exclude reference="3Es-Ot-HGb"/>
-                                <exclude reference="uZD-MI-MvN"/>
+                                <exclude reference="J9i-w5-Bsf"/>
+                                <exclude reference="zMC-S4-v5N"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -69,9 +55,8 @@
                                 <include reference="3u7-Pc-8OD"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="MCe-Qm-NQy"/>
-                                <include reference="3Es-Ot-HGb"/>
-                                <include reference="uZD-MI-MvN"/>
+                                <include reference="J9i-w5-Bsf"/>
+                                <include reference="zMC-S4-v5N"/>
                             </mask>
                         </variation>
                     </view>
@@ -173,11 +158,11 @@
                                 <exclude reference="cEl-gK-PbT"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="KMj-Dc-9uD"/>
-                                <exclude reference="n7f-v1-YIJ"/>
+                                <exclude reference="8Lf-NF-F2Q"/>
                                 <exclude reference="3kJ-aN-Mzd"/>
                                 <exclude reference="7yI-xQ-Hk9"/>
-                                <exclude reference="8Lf-NF-F2Q"/>
+                                <exclude reference="KMj-Dc-9uD"/>
+                                <exclude reference="n7f-v1-YIJ"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -186,11 +171,11 @@
                                 <include reference="cEl-gK-PbT"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="KMj-Dc-9uD"/>
-                                <include reference="n7f-v1-YIJ"/>
+                                <include reference="8Lf-NF-F2Q"/>
                                 <include reference="3kJ-aN-Mzd"/>
                                 <include reference="7yI-xQ-Hk9"/>
-                                <include reference="8Lf-NF-F2Q"/>
+                                <include reference="KMj-Dc-9uD"/>
+                                <include reference="n7f-v1-YIJ"/>
                             </mask>
                         </variation>
                     </view>
@@ -356,5 +341,7 @@
     </scenes>
     <resources>
         <image name="CloseWindow" width="45" height="45"/>
+        <image name="RecordButton" width="64" height="63"/>
+        <image name="Recording" width="68" height="67"/>
     </resources>
 </document>

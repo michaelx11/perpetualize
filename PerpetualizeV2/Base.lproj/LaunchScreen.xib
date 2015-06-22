@@ -23,7 +23,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="B0x-h1-UNf">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="B0x-h1-UNf">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                 </imageView>
             </subviews>
@@ -68,6 +68,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Image" width="375" height="667"/>
+        <image name="LaunchImage" width="375" height="667"/>
     </resources>
 </document>
