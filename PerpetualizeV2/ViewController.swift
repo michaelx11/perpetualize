@@ -20,7 +20,13 @@ class ViewController: UIViewController {
     var playbackController : PlaybackController!
     var resultPlaybackController : ResultPlaybackController!
     var previewLayer : AVCaptureVideoPreviewLayer?
+    
     @IBOutlet var recordButton : UIButton!
+    @IBOutlet var durationLabel : UILabel!
+    @IBOutlet var durationBackground : UIView!
+    
+    var duration : Int64 = 0
+    var durationTimer : NSTimer!
     
     // If we find a device we'll store it here for later use
     var captureDevice : AVCaptureDevice?
@@ -59,6 +65,8 @@ class ViewController: UIViewController {
         // HACK: give a reference to allow playback to present our view when done
         playbackController.mainView = self
         
+        self.durationLabel.hidden = true
+        self.durationBackground.hidden = true
     }
 
     func beginSession() {
@@ -87,6 +95,7 @@ class ViewController: UIViewController {
     
     @IBAction func startRecording() {
         println("started recording!")
+        startTimer()
         var temp = NSTemporaryDirectory();
         var outputURL : NSURL = NSURL(fileURLWithPath: "\(temp)/movie" + NSProcessInfo.processInfo().globallyUniqueString + ".mp4")!
         println("URL: \(outputURL)")
@@ -95,8 +104,30 @@ class ViewController: UIViewController {
     }
     
     @IBAction func stopRecording() {
+        stopTimer()
         println("stopped recording woo")
         self.movieOutput.stopRecording();
+    }
+    
+    func startTimer() {
+        self.durationLabel.text = "0:00"
+        self.duration = 0
+        self.durationLabel.hidden = false
+        self.durationBackground.hidden = false
+        self.durationTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "tickDuration", userInfo: nil, repeats: true)
+    }
+    
+    func stopTimer() {
+        self.durationTimer.invalidate()
+        self.durationLabel.hidden = true
+        self.durationBackground.hidden = true
+    }
+    
+    func tickDuration() {
+        self.duration += 1
+        let minutes = self.duration / 60
+        let seconds = self.duration % 60
+        self.durationLabel.text = String(format: "%d:%02d", minutes, seconds)
     }
     
     func configureDevice() {
