@@ -24,6 +24,8 @@ class ViewController: UIViewController {
     @IBOutlet var recordButton : UIButton!
     @IBOutlet var durationLabel : UILabel!
     @IBOutlet var durationBackground : UIView!
+    @IBOutlet var holdLabel : UILabel!
+    @IBOutlet var holdBackground : UIImageView!
     
     var duration : Int64 = 0
     var durationTimer : NSTimer!
@@ -67,6 +69,8 @@ class ViewController: UIViewController {
         
         self.durationLabel.hidden = true
         self.durationBackground.hidden = true
+        self.holdLabel.hidden = false
+        self.holdBackground.hidden = false
     }
 
     func beginSession() {
@@ -114,6 +118,8 @@ class ViewController: UIViewController {
         self.duration = 0
         self.durationLabel.hidden = false
         self.durationBackground.hidden = false
+        self.holdLabel.hidden = true
+        self.holdBackground.hidden = true
         self.durationTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "tickDuration", userInfo: nil, repeats: true)
     }
     
@@ -121,6 +127,8 @@ class ViewController: UIViewController {
         self.durationTimer.invalidate()
         self.durationLabel.hidden = true
         self.durationBackground.hidden = true
+        self.holdLabel.hidden = false
+        self.holdBackground.hidden = false
     }
     
     func tickDuration() {
