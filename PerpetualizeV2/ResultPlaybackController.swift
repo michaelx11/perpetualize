@@ -127,8 +127,8 @@ class ResultPlaybackController: UIViewController {
         player?.play()
     }
     
-    @IBAction func segueToMainView() {
-        self.navigationController?.popToRootViewControllerAnimated(false)
+    @IBAction func exitView() {
+        presentDeleteWarning()
     }
     
 //    @IBAction func discardVideo() {
@@ -156,6 +156,29 @@ class ResultPlaybackController: UIViewController {
 //            println("yeah dismissed yeah")
 //        })
 //    }
+    
+    func presentDeleteWarning() {
+        var alert = UIAlertController(title: "Are you sure you want to permanently delete this GIF?",
+            message: "You have not saved this gif. Exiting now will permanently delete it.",
+            preferredStyle: .Alert)
+        
+        let deleteAction = UIAlertAction(title: "Delete GIF",
+            style: .Default) { (action: UIAlertAction!) -> Void in
+                // Exit View
+                self.navigationController?.popToRootViewControllerAnimated(false)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel",
+            style: .Default) { (action: UIAlertAction!) -> Void in
+        }
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert,
+            animated: true,
+            completion: nil)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

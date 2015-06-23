@@ -108,7 +108,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func stopRecording() {
-        stopTimer()
         println("stopped recording woo")
         self.movieOutput.stopRecording();
     }

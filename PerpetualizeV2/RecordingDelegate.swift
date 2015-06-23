@@ -29,6 +29,7 @@ class RecordingDelegate : NSObject, AVCaptureFileOutputRecordingDelegate {
             println(err)
         }
         localData.currentVideoURL = outputFileURL
+        self.parent.stopTimer()
         self.parent.playbackController.refreshPlayer()
         self.parent.presentPlaybackView()
         println("Stopped recording movie!")
