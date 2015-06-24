@@ -29,6 +29,7 @@
                                 <state key="highlighted" image="Recording"/>
                                 <connections>
                                     <action selector="startRecording" destination="vXZ-lx-hvc" eventType="touchDown" id="WuY-2r-frl"/>
+                                    <action selector="stopRecording" destination="vXZ-lx-hvc" eventType="touchCancel" id="Maw-D2-ehE"/>
                                     <action selector="stopRecording" destination="vXZ-lx-hvc" eventType="touchUpOutside" id="Uvd-bF-O7P"/>
                                     <action selector="stopRecording" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mS8-EC-m4G"/>
                                 </connections>

@@ -51,6 +51,7 @@ class ResultPlaybackController: UIViewController {
         
         if pollCounter > MAX_TIMES {
             // TODO: trigger error / segue back
+            println("TIME OUT")
             pollTimer?.invalidate()
             return
         }
@@ -89,7 +90,7 @@ class ResultPlaybackController: UIViewController {
         isPolling = false
         pollCounter = 0
         pollTimer?.invalidate()
-        pollTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "getVideoData", userInfo: nil, repeats: true)
+        pollTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "getVideoData", userInfo: nil, repeats: true)
         pollTimer?.fire()
         
     }

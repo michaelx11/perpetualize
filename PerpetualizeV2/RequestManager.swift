@@ -9,7 +9,7 @@
 import Foundation
 import MobileCoreServices
 
-let host : NSString = "util.in";
+let host : NSString = "best.haus";
 //let host : NSString = "one.haus";
 
 class RequestManager {
@@ -29,15 +29,12 @@ class RequestManager {
             "password" : "placeholder"]  // build your dictionary however appropriate
         
         let boundary = generateBoundaryString()
-        println(boundary);
         
         let url = NSURL(string: "http://\(host)/video")
+//        let url = NSURL(string: "http://\(host)")
         let request = NSMutableURLRequest(URL: url!)
         request.HTTPMethod = "POST"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        
-//        let path1 = NSBundle.mainBundle().pathForResource("image1", ofType: "png") as String!
-//        let path2 = NSBundle.mainBundle().pathForResource("image2", ofType: "jpg") as String!
         request.HTTPBody = createBodyWithParameters(param, filePathKey: "uploadVideo", paths: [fileURL.path!], boundary: boundary)
         return request
     }
@@ -72,6 +69,8 @@ class RequestManager {
                 body.appendData(stringToNSData("--\(boundary)\r\n"))
                 body.appendData(stringToNSData("Content-Disposition: form-data; name=\"\(filePathKey!)\"; filename=\"\(filename)\"\r\n"))
                 body.appendData(stringToNSData("Content-Type: \(mimetype)\r\n\r\n"))
+                println(data?.length)
+//                body.appendData(stringToNSData("HELLO THERE MY FRIENDS"))
                 body.appendData(data!)
                 body.appendData(stringToNSData("\r\n"))
             }
@@ -111,16 +110,19 @@ class RequestManager {
     
     func uploadMovie(fileURL : NSURL, handler : (getURL: NSString?, error: NSString?) -> Void) {
         var request = createRequest(fileURL);
+        println(request.URL)
+        println("Uploading movie!")
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: {
             data, response, error in
             
+            println("getting here!")
             if error != nil {
                 println("ERROR: \(error)")
                 // handle error here
                 handler(getURL: nil, error: error.localizedDescription)
                 return
             }
-            
+            println("NO ERROR in uploading movie")
             // if response was JSON, then parse it
             
             var err: NSError?
@@ -132,6 +134,7 @@ class RequestManager {
                     handler(getURL: nil, error: err!.localizedDescription)
                     return;
                 }
+                println("Got something huh")
                 if (jsonResult["error"] != nil) {
                     println(jsonResult["error"]);
                     dispatch_async(dispatch_get_main_queue(), {
@@ -139,7 +142,7 @@ class RequestManager {
                     })
                 } else {
                     dispatch_async(dispatch_get_main_queue(), {
-                         handler(getURL: jsonResult["mp4_url"] as? NSString, error: nil);
+                         handler(getURL: jsonResult["avi_url"] as? NSString, error: nil);
                     })
                 }
             } else {
@@ -157,10 +160,10 @@ class RequestManager {
     }
     
     func downloadFile(remoteURL: String, handler : (fileURL: NSURL?, error: NSString?) -> Void) {
-        // BIG HACK TO ALLOW THINGS TO MOVE - just replays original video
-        
-        handler(fileURL: NSURL(fileURLWithPath: localData.downloadedVideoURL!), error: nil)
-        return
+//        // BIG HACK TO ALLOW THINGS TO MOVE - just replays original video
+//        
+//        handler(fileURL: NSURL(fileURLWithPath: localData.downloadedVideoURL!), error: nil)
+//        return
         
         var request: NSMutableURLRequest?
         if let goodURL = NSURL(string: "http://\(host)/" + remoteURL) {
@@ -196,7 +199,7 @@ class RequestManager {
             }
             
             var temp = NSTemporaryDirectory()
-            var localURL = NSURL(fileURLWithPath: "\(temp)/result" + NSProcessInfo.processInfo().globallyUniqueString + ".mp4")!
+            var localURL = NSURL(fileURLWithPath: "\(temp)/result" + NSProcessInfo.processInfo().globallyUniqueString + ".avi")!
             
             var err: NSError?
             

@@ -69,15 +69,22 @@ class PlaybackController: UIViewController {
             UISaveVideoAtPathToSavedPhotosAlbum(outputURL.path, nil, nil, nil)
             println("WROTE THE VIDEO")
             
-            localData.downloadedVideoURL = outputURL.path
-            self.resultVideoSegue()
-            
             // Hack for no server, just replay original ^^^
-//            requestManager.uploadMovie(outputURL, handler: {(url: NSString?, error: NSString?) -> Void in
-//                println("YEAHHHHHHH \(outputURL)");
-//                localData.downloadedVideoURL = String(url!)
-//                self.resultVideoSegue()
-//            })
+//            localData.downloadedVideoURL = outputURL.path
+//            self.resultVideoSegue()
+            println(outputURL)
+            
+
+            requestManager.uploadMovie(outputURL, handler: {(url: NSString?, error: NSString?) -> Void in
+                println("YEAHHHHHHH \(outputURL)");
+                
+                if (error != nil) {
+                    println("Error saving video: \(error)")
+                } else {
+                    localData.downloadedVideoURL = String(url!)
+                    self.resultVideoSegue()
+                }
+            })
         } else {
             rewindSegue()
         }

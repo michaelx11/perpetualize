@@ -30,6 +30,10 @@ class ViewController: UIViewController {
     var duration : Int64 = 0
     var durationTimer : NSTimer!
     
+    var isRecording : Bool = false
+    
+    
+    
     // If we find a device we'll store it here for later use
     var captureDevice : AVCaptureDevice?
     var movieOutput : AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
@@ -98,6 +102,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startRecording() {
+        if isRecording {
+            stopRecording()
+            isRecording = false
+        }
         println("started recording!")
         startTimer()
         var temp = NSTemporaryDirectory();
@@ -109,7 +117,8 @@ class ViewController: UIViewController {
     
     @IBAction func stopRecording() {
         println("stopped recording woo")
-        self.movieOutput.stopRecording();
+        self.movieOutput.stopRecording()
+        isRecording = false
     }
     
     func startTimer() {
