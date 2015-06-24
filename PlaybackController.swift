@@ -74,17 +74,18 @@ class PlaybackController: UIViewController {
 //            self.resultVideoSegue()
             println(outputURL)
             
-
-            requestManager.uploadMovie(outputURL, handler: {(url: NSString?, error: NSString?) -> Void in
-                println("YEAHHHHHHH \(outputURL)");
-                
-                if (error != nil) {
-                    println("Error saving video: \(error)")
-                } else {
-                    localData.downloadedVideoURL = String(url!)
-                    self.resultVideoSegue()
-                }
-            })
+            let loopedFileURL: NSURL = CVWrapper.processMovie(outputURL)
+            println(loopedFileURL)
+//            requestManager.uploadMovie(outputURL, handler: {(url: NSString?, error: NSString?) -> Void in
+//                println("YEAHHHHHHH \(outputURL)");
+//                
+//                if (error != nil) {
+//                    println("Error saving video: \(error)")
+//                } else {
+//                    localData.downloadedVideoURL = String(url!)
+//                    self.resultVideoSegue()
+//                }
+//            })
         } else {
             rewindSegue()
         }
