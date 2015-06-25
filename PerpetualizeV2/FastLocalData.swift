@@ -11,4 +11,5 @@ import Foundation
 class FastLocalData {
     var currentVideoURL: NSURL?
     var downloadedVideoURL: String?
+    var processedVideoURL: NSURL?
 }

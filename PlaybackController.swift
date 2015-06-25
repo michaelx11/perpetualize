@@ -65,6 +65,11 @@ class PlaybackController: UIViewController {
     
     @IBAction func saveVideo() {
         var outputURL = localData.currentVideoURL!
+        let loopedFileURL: NSURL = CVWrapper.processMovie(outputURL)
+        localData.processedVideoURL = loopedFileURL
+        println(loopedFileURL)
+        self.resultVideoSegue()
+        /*
         if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(outputURL.path) {
             UISaveVideoAtPathToSavedPhotosAlbum(outputURL.path, nil, nil, nil)
             println("WROTE THE VIDEO")
@@ -89,6 +94,7 @@ class PlaybackController: UIViewController {
         } else {
             rewindSegue()
         }
+        */
     }
     
     func rewindSegue() {

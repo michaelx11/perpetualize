@@ -38,6 +38,9 @@ class ResultPlaybackController: UIViewController {
     }
     
     func getVideoData() {
+        self.resultFileURL = localData.processedVideoURL!
+        self.refreshPlayer()
+        /*
         println("POLLING NOW")
         pollLock.lock()
         if isPolling {
@@ -80,6 +83,7 @@ class ResultPlaybackController: UIViewController {
                 println(self.resultFileURL)
             }
         })
+        */
     }
     
     func reset() {
@@ -89,9 +93,10 @@ class ResultPlaybackController: UIViewController {
         resultFileURL = nil
         isPolling = false
         pollCounter = 0
-        pollTimer?.invalidate()
-        pollTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "getVideoData", userInfo: nil, repeats: true)
-        pollTimer?.fire()
+        getVideoData()
+//        pollTimer?.invalidate()
+//        pollTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "getVideoData", userInfo: nil, repeats: true)
+//        pollTimer?.fire()
         
     }
     
